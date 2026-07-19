@@ -1,0 +1,230 @@
+{
+  "nodes": [
+    {
+      "id": "adjusted-plus-minus",
+      "title": "Adjusted Plus-Minus",
+      "type": "concept"
+    },
+    {
+      "id": "d3js",
+      "title": "D3.js",
+      "type": "entity"
+    },
+    {
+      "id": "digit-recognizer",
+      "title": "Digit Recognizer",
+      "type": "concept"
+    },
+    {
+      "id": "index",
+      "title": "Knowledge Index",
+      "type": "hub"
+    },
+    {
+      "id": "kebab-case",
+      "title": "Kebab Case",
+      "type": "concept"
+    },
+    {
+      "id": "koba-career",
+      "title": "Koba Khitalishvili's Career",
+      "type": "entity"
+    },
+    {
+      "id": "linear-optimization",
+      "title": "Linear Optimization",
+      "type": "concept"
+    },
+    {
+      "id": "llm-wiki",
+      "title": "LLM Wiki",
+      "type": "hub"
+    },
+    {
+      "id": "nba-3pt-spiral",
+      "title": "NBA 3-Point Evolution",
+      "type": "concept"
+    },
+    {
+      "id": "nba-analytics",
+      "title": "NBA Analytics",
+      "type": "hub"
+    },
+    {
+      "id": "nba-lineup-optimizer",
+      "title": "NBA Lineup Optimizer",
+      "type": "entity"
+    },
+    {
+      "id": "persona-framework",
+      "title": "Persona Framework",
+      "type": "entity"
+    }
+  ],
+  "edges": [
+    {
+      "source": "adjusted-plus-minus",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "adjusted-plus-minus",
+      "target": "nba-lineup-optimizer"
+    },
+    {
+      "source": "d3js",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "d3js",
+      "target": "llm-wiki"
+    },
+    {
+      "source": "d3js",
+      "target": "persona-framework"
+    },
+    {
+      "source": "d3js",
+      "target": "koba-career"
+    },
+    {
+      "source": "index",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "index",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "index",
+      "target": "d3js"
+    },
+    {
+      "source": "index",
+      "target": "persona-framework"
+    },
+    {
+      "source": "index",
+      "target": "llm-wiki"
+    },
+    {
+      "source": "index",
+      "target": "koba-career"
+    },
+    {
+      "source": "koba-career",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "koba-career",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "koba-career",
+      "target": "d3js"
+    },
+    {
+      "source": "koba-career",
+      "target": "persona-framework"
+    },
+    {
+      "source": "koba-career",
+      "target": "llm-wiki"
+    },
+    {
+      "source": "linear-optimization",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "linear-optimization",
+      "target": "persona-framework"
+    },
+    {
+      "source": "linear-optimization",
+      "target": "d3js"
+    },
+    {
+      "source": "linear-optimization",
+      "target": "koba-career"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "persona-framework"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "index"
+    },
+    {
+      "source": "llm-wiki",
+      "target": "koba-career"
+    },
+    {
+      "source": "nba-3pt-spiral",
+      "target": "nba-3pt-spiral"
+    },
+    {
+      "source": "nba-3pt-spiral",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "nba-3pt-spiral",
+      "target": "adjusted-plus-minus"
+    },
+    {
+      "source": "nba-3pt-spiral",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "nba-analytics",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "nba-analytics",
+      "target": "d3js"
+    },
+    {
+      "source": "nba-analytics",
+      "target": "persona-framework"
+    },
+    {
+      "source": "nba-analytics",
+      "target": "llm-wiki"
+    },
+    {
+      "source": "nba-lineup-optimizer",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "nba-lineup-optimizer",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "nba-lineup-optimizer",
+      "target": "koba-career"
+    },
+    {
+      "source": "persona-framework",
+      "target": "linear-optimization"
+    },
+    {
+      "source": "persona-framework",
+      "target": "nba-analytics"
+    },
+    {
+      "source": "persona-framework",
+      "target": "d3js"
+    },
+    {
+      "source": "persona-framework",
+      "target": "koba-career"
+    }
+  ]
+}

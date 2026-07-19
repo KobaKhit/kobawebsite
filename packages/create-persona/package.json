@@ -1,0 +1,22 @@
+{
+  "name": "create-persona",
+  "version": "0.1.0",
+  "description": "Scaffold a Persona personal site (Next.js + LLM Wiki)",
+  "bin": {
+    "create-persona": "./bin/create-persona.js"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "keywords": [
+    "persona",
+    "nextjs",
+    "wiki",
+    "scaffolder"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
