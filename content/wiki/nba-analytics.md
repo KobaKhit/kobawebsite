@@ -21,7 +21,7 @@ Koba's basketball analytics work (roughly 2013–2016 corpus) centers on **credi
 
 - **Plus-minus & APM** — teammate/opponent confounds; ridge regularization; sample-size humility. See source *Reading Plus-Minus Without Getting Fooled*.
 - **Lineup construction** — projections feed [[linear-optimization]] MIPs under salary and position constraints.
-- **Visualization** — shot charts and lineup networks via [[d3js]], informing later wiki graph UX in [[persona-framework]].
+- **Visualization** — shot charts and lineup networks via [[d3js]], informing later wiki graph UX in [[presence-framework]].
 
 ## Multi-hop note
 

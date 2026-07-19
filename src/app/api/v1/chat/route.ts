@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { ChatRequestSchema } from "@/lib/api/schemas";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 import { getEntry } from "@/lib/content/entries";
 import { getKnowledgeProvider } from "@/lib/knowledge";
 import {
@@ -65,7 +65,7 @@ function extractiveContent(
 ): string {
   const top = documents.filter((d) => d.kind === "wiki").slice(0, 3);
   if (top.length === 0) {
-    return `I searched the knowledge base for “${question}” but didn't find strong matches. Try the Wiki index or ask about optimization, NBA analytics, or Persona.`;
+    return `I searched the knowledge base for “${question}” but didn't find strong matches. Try the Wiki index or ask about optimization, NBA analytics, or Presence.`;
   }
   return [
     `Based on the compiled wiki (no LLM key configured — grounded extractive mode):`,
@@ -108,11 +108,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No user message" }, { status: 400 });
   }
 
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
   const status = getLlmStatus();
   const { ctx, sources, contextBlock } = await buildContext(lastUser.content);
 
-  const system = `You are the on-site agent for ${config.fullName}'s personal site (Persona framework).
+  const system = `You are the on-site agent for ${config.fullName}'s personal site (Presence framework).
 Answer using the provided wiki/source context. Prefer wiki pages for relationships.
 Cite page titles inline. If context is insufficient, say so briefly.
 Be concise and specific. When helpful, mention paths like /wiki/slug, /blog/slug, /projects/slug, /visuals/slug.`;

@@ -1,4 +1,4 @@
----
+﻿---
 title: "Knowledge Index"
 summary: "Hub page for Koba's compiled wiki — start here for the whole body of work."
 type: hub
@@ -15,8 +15,8 @@ This wiki is the **compiled** view of immutable sources under `content/sources/`
 - [[linear-optimization]] — MIP, constraints, and decision models
 - [[nba-analytics]] — forecasting, plus-minus, lineup construction
 - [[d3js]] — visualization craft that later shaped the wiki graph UI
-- [[persona-framework]] — the open-source personal site + knowledge layer
-- [[llm-wiki]] — Karpathy-style compilation pattern behind Persona
+- [[presence-framework]] — the open-source personal site + knowledge layer
+- [[llm-wiki]] — Karpathy-style compilation pattern behind Presence
 - [[koba-career]] — biographical synthesis
 
 ## How to read this

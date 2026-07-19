@@ -20,7 +20,7 @@ updated: '2026-07-19'
 2. Encode hard constraints (salary, positions, minutes).
 3. Optimize expected utility with a MIP solver (CBC, Gurobi, PuLP).
 
-This pattern connects [[nba-analytics]] lineup construction to later systems thinking in [[persona-framework]] — compile once, query under structure.
+This pattern connects [[nba-analytics]] lineup construction to later systems thinking in [[presence-framework]] — compile once, query under structure.
 
 ## Related
 

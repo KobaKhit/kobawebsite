@@ -6,7 +6,7 @@ import { getKnowledgeProvider, writeWikiGraph, WikiKnowledgeProvider } from "@/l
  * Full LLM synthesis belongs in the CLI; this keeps UI compile zero-config.
  */
 export async function POST() {
-  if (process.env.PERSONA_ADMIN_TOKEN) {
+  if (process.env.PRESENCE_ADMIN_TOKEN || process.env.PERSONA_ADMIN_TOKEN) {
     // Optional lock for production
   }
 
@@ -26,7 +26,7 @@ export async function POST() {
       linkCount: report.linkCount,
       orphans: report.orphans,
       missingTargets: report.missingTargets,
-      note: "Graph index refreshed from content/wiki. Run `npm run persona -- compile` for LLM page synthesis (OPENROUTER_API_KEY preferred).",
+      note: "Graph index refreshed from content/wiki. Run `npm run presence -- compile` for LLM page synthesis (OPENROUTER_API_KEY preferred).",
     });
   } catch (err) {
     return NextResponse.json(

@@ -39,15 +39,23 @@ export interface VectorStore {
   close?(): Promise<void> | void;
 }
 
+function envFirst(...keys: string[]): string | undefined {
+  for (const key of keys) {
+    const v = process.env[key]?.trim();
+    if (v) return v;
+  }
+  return undefined;
+}
+
 function defaultSqlitePath(): string {
   return (
-    process.env.PERSONA_VECTOR_DB?.trim() ||
+    envFirst("PRESENCE_VECTOR_DB", "PERSONA_VECTOR_DB") ||
     path.join(process.cwd(), "data", "vectors.sqlite")
   );
 }
 
 function wantsPgvector(): boolean {
-  const explicit = process.env.PERSONA_VECTOR_STORE?.trim().toLowerCase();
+  const explicit = envFirst("PRESENCE_VECTOR_STORE", "PERSONA_VECTOR_STORE")?.toLowerCase();
   if (explicit === "sqlite") return false;
   if (explicit === "pgvector" || explicit === "postgres") return true;
   const url = process.env.DATABASE_URL?.trim() ?? "";

@@ -1,9 +1,9 @@
-import type { PersonaConfig } from "@/lib/config/types";
+import type { PresenceConfig } from "@/lib/config/types";
 
 /**
  * Identity & module toggles — forks edit this file, never framework code.
  */
-const config: PersonaConfig = {
+const config: PresenceConfig = {
   name: "Koba",
   fullName: "Koba Khitalishvili",
   tagline: "Data scientist, analytics engineer, and occasional web builder.",
@@ -45,7 +45,7 @@ const config: PersonaConfig = {
     chatModel: "openai/gpt-4o-mini",
   },
   deploy: {
-    templateRepoUrl: "",
+    templateRepoUrl: "https://github.com/KobaKhit/presence",
   },
 };
 

@@ -1,15 +1,15 @@
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 import { getEnabledModules } from "@/lib/modules/registry";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
   const modules = getEnabledModules();
 
   const body = `# ${config.fullName} — llms.txt
 
-> Persona personal site with a compiled LLM Wiki knowledge layer.
+> Presence personal site with a compiled LLM Wiki knowledge layer.
 > Prefer the API and skills over scraping HTML.
 
 ## Identity
@@ -19,7 +19,7 @@ export async function GET() {
 
 ## Primary endpoints
 - OpenAPI: /openapi.json
-- Persona: GET /api/v1/persona
+- Presence: GET /api/v1/presence
 - Blog: GET /api/v1/blog , GET /api/v1/blog/{slug}
 - Projects: GET /api/v1/projects , GET /api/v1/projects/{slug}
 - Resume: GET /api/v1/resume

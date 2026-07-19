@@ -56,8 +56,8 @@
       "type": "entity"
     },
     {
-      "id": "persona-framework",
-      "title": "Persona Framework",
+      "id": "presence-framework",
+      "title": "Presence Framework",
       "type": "entity"
     }
   ],
@@ -80,7 +80,7 @@
     },
     {
       "source": "d3js",
-      "target": "persona-framework"
+      "target": "presence-framework"
     },
     {
       "source": "d3js",
@@ -100,7 +100,7 @@
     },
     {
       "source": "index",
-      "target": "persona-framework"
+      "target": "presence-framework"
     },
     {
       "source": "index",
@@ -124,7 +124,7 @@
     },
     {
       "source": "koba-career",
-      "target": "persona-framework"
+      "target": "presence-framework"
     },
     {
       "source": "koba-career",
@@ -136,7 +136,7 @@
     },
     {
       "source": "linear-optimization",
-      "target": "persona-framework"
+      "target": "presence-framework"
     },
     {
       "source": "linear-optimization",
@@ -148,7 +148,7 @@
     },
     {
       "source": "llm-wiki",
-      "target": "persona-framework"
+      "target": "presence-framework"
     },
     {
       "source": "llm-wiki",
@@ -192,7 +192,7 @@
     },
     {
       "source": "nba-analytics",
-      "target": "persona-framework"
+      "target": "presence-framework"
     },
     {
       "source": "nba-analytics",
@@ -211,19 +211,19 @@
       "target": "koba-career"
     },
     {
-      "source": "persona-framework",
+      "source": "presence-framework",
       "target": "linear-optimization"
     },
     {
-      "source": "persona-framework",
+      "source": "presence-framework",
       "target": "nba-analytics"
     },
     {
-      "source": "persona-framework",
+      "source": "presence-framework",
       "target": "d3js"
     },
     {
-      "source": "persona-framework",
+      "source": "presence-framework",
       "target": "koba-career"
     }
   ]

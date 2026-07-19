@@ -55,7 +55,7 @@ export default async function DocsPage({
         ))}
       </nav>
 
-      <article className="prose-persona mt-10 whitespace-pre-wrap font-[family-name:var(--font-geist-sans)] text-sm leading-relaxed text-ink-soft">
+      <article className="prose-presence mt-10 whitespace-pre-wrap font-[family-name:var(--font-geist-sans)] text-sm leading-relaxed text-ink-soft">
         {body}
       </article>
 

@@ -3,7 +3,7 @@ import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 
 extendZodWithOpenApi(z);
 
-export const PersonaSchema = z
+export const PresenceSchema = z
   .object({
     name: z.string(),
     fullName: z.string(),
@@ -14,7 +14,7 @@ export const PersonaSchema = z
     website: z.string().url().optional(),
     social: z.record(z.string(), z.string().optional()),
   })
-  .openapi("Persona");
+  .openapi("Presence");
 
 export const BlogPostSummarySchema = z
   .object({

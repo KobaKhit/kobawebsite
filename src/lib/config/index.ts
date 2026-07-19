@@ -1,8 +1,8 @@
-import config from "../../../content/persona.config";
-import type { PersonaConfig } from "./types";
+import config from "../../../content/presence.config";
+import type { PresenceConfig } from "./types";
 
-export type { PersonaConfig } from "./types";
+export type { PresenceConfig } from "./types";
 
-export function getPersonaConfig(): PersonaConfig {
+export function getPresenceConfig(): PresenceConfig {
   return config;
 }

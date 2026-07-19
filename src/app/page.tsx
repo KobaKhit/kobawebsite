@@ -1,11 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 import { getBlogPosts, getProjects } from "@/lib/content/loaders";
 import { RoleTyper } from "@/components/role-typer";
 
 export default async function HomePage() {
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
   const [allProjects, allPosts] = await Promise.all([getProjects(), getBlogPosts()]);
 
   const featuredProjects = allProjects.filter((p) => p.featured).slice(0, 6);
@@ -208,11 +208,11 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Persona knowledge strip ────────────────────────────── */}
+      {/* ── Presence knowledge strip ────────────────────────────── */}
       <section className="mx-auto max-w-5xl px-5 pb-20 md:px-8">
         <div className="rounded-3xl border border-line bg-ink px-8 py-8">
           <p className="font-[family-name:var(--font-jetbrains)] text-[11px] uppercase tracking-[0.2em] text-accent-bright">
-            Powered by Persona
+            Powered by Presence
           </p>
           <p className="mt-3 font-[family-name:var(--font-syne)] text-xl text-white md:text-2xl">
             Everything I&apos;ve written, compiled into a searchable knowledge graph.
@@ -231,7 +231,7 @@ export default async function HomePage() {
               Chat with it
             </Link>
             <Link
-              href="/api/v1/persona"
+              href="/api/v1/presence"
               className="rounded-full border border-white/20 px-4 py-2 text-sm text-white/80 transition hover:border-accent-bright hover:text-accent-bright"
             >
               API

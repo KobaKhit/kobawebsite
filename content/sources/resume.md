@@ -1,4 +1,4 @@
----
+﻿---
 name: Koba Khitalishvili
 headline: Data scientist · analytics engineer · web builder
 email: kobakhit@gmail.com
@@ -29,7 +29,7 @@ Undergraduate and early-career research in econometrics — OLS regression, poli
 
 ## Projects
 
-- **Persona** — Open-source Next.js personal site framework with LLM Wiki, versioned API, MCP/agent surfaces. Built in 2026.
+- **Presence** — Open-source Next.js personal site framework with LLM Wiki, versioned API, MCP/agent surfaces. Built in 2026.
 - **Digit Recognizer (Python CNN)** — 98.6% accuracy on Kaggle MNIST; featured as a tutorial. 2015.
 - **Digit Recognizer (R)** — ~97.8% accuracy; tweeted by Kaggle as an R neural network tutorial. 2015.
 - **enkrypt-page** — Browser-only AES/DES/steganography tool that went viral on Reddit r/InternetIsBeautiful. 2014.

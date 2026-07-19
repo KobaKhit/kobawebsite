@@ -1,6 +1,6 @@
-# Knowledge layer
+﻿# Knowledge layer
 
-Persona follows the LLM Wiki pattern:
+Presence follows the LLM Wiki pattern:
 
 1. **`content/sources/`** — immutable intake (blog, projects, resume, inbox).
 2. **`content/wiki/`** — compiled markdown pages with `[[wiki-links]]`.
@@ -9,7 +9,7 @@ Persona follows the LLM Wiki pattern:
 ## Compile
 
 ```bash
-npm run persona -- compile
+npm run presence -- compile
 ```
 
 With `OPENROUTER_API_KEY` (preferred) or `OPENAI_API_KEY`:
@@ -37,4 +37,4 @@ Incremental synthesis may:
 - Set `contradictions:` in page frontmatter
 - Add a `## Views that evolved` section
 
-`persona doctor` surfaces both. Do not “fix” contradictions by editing sources — update the wiki or add a newer source.
+`presence doctor` surfaces both. Do not “fix” contradictions by editing sources — update the wiki or add a newer source.

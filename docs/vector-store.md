@@ -1,4 +1,4 @@
-# Vector store
+﻿# Vector store
 
 Hybrid search = **lexical (Fuse.js)** + **persisted embeddings** + **1–2 hop graph expansion**.
 
@@ -10,9 +10,10 @@ Uses `better-sqlite3` and cosine similarity in-process (no native `sqlite-vec` e
 
 ```bash
 # optional path override
-PERSONA_VECTOR_DB=./data/vectors.sqlite
+PRESENCE_VECTOR_DB=./data/vectors.sqlite
+# PERSONA_VECTOR_DB=./data/vectors.sqlite   # legacy fallback
 
-npm run persona -- reindex
+npm run presence -- reindex
 ```
 
 Without an API key, reindex still opens the store and prunes stale ids; it does not invent embeddings.
@@ -26,10 +27,11 @@ npm install pg
 # enable extension in your DB: CREATE EXTENSION vector;
 
 DATABASE_URL=postgres://user:pass@host:5432/db
-PERSONA_VECTOR_STORE=pgvector   # optional; auto-detected from postgres:// URL
+PRESENCE_VECTOR_STORE=pgvector   # optional; auto-detected from postgres:// URL
+# PERSONA_VECTOR_STORE=pgvector  # legacy fallback
 ```
 
-Persona creates `persona_embeddings` and uses `<=>` distance. If `pg` is missing or the extension fails, search falls back to SQLite.
+Presence creates the table `persona_embeddings` (name kept for compatibility) and uses `<=>` distance. If `pg` is missing or the extension fails, search falls back to SQLite.
 
 ## Env summary
 
@@ -37,6 +39,6 @@ Persona creates `persona_embeddings` and uses `<=>` distance. If `pg` is missing
 |---|---|
 | `OPENROUTER_API_KEY` | Preferred embeddings + chat |
 | `OPENAI_API_KEY` | Fallback |
-| `PERSONA_VECTOR_DB` | SQLite file path |
-| `PERSONA_VECTOR_STORE` | `sqlite` \| `pgvector` |
+| `PRESENCE_VECTOR_DB` | SQLite file path (`PERSONA_VECTOR_DB` fallback) |
+| `PRESENCE_VECTOR_STORE` | `sqlite` \| `pgvector` (`PERSONA_VECTOR_STORE` fallback) |
 | `DATABASE_URL` | Postgres connection for pgvector |

@@ -6,7 +6,7 @@ import Link from "next/link";
 const steps = [
   {
     title: "Name & bio",
-    body: "Edit content/persona.config.ts — name, tagline, social links, theme accents.",
+    body: "Edit content/presence.config.ts — name, tagline, social links, theme accents.",
   },
   {
     title: "Add sources",
@@ -14,7 +14,7 @@ const steps = [
   },
   {
     title: "Compile wiki",
-    body: "Run npm run persona -- compile (or use the button below in local/dev). Review generated pages, then commit.",
+    body: "Run npm run presence -- compile (or use the button below in local/dev). Review generated pages, then commit.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function SetupPage() {
         <h3 className="font-[family-name:var(--font-syne)] text-lg">Compile wiki</h3>
         <p className="mt-2 text-sm text-muted">
           Rebuilds the link graph from <code>content/wiki</code>. Full LLM entity extraction runs via{" "}
-          <code>npm run persona -- compile</code> when <code>OPENROUTER_API_KEY</code> (preferred) or{" "}
+          <code>npm run presence -- compile</code> when <code>OPENROUTER_API_KEY</code> (preferred) or{" "}
           <code>OPENAI_API_KEY</code> is set.
         </p>
         <button

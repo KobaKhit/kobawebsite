@@ -1,5 +1,5 @@
-import { getPersonaConfig } from "@/lib/config";
-import type { PersonaModule } from "@/lib/modules/types";
+import { getPresenceConfig } from "@/lib/config";
+import type { PresenceModule } from "@/lib/modules/types";
 import {
   BlogPostSchema,
   BlogPostSummarySchema,
@@ -11,9 +11,9 @@ import {
   WikiPageSummarySchema,
 } from "@/lib/api/schemas";
 
-export function getEnabledModules(): PersonaModule[] {
-  const config = getPersonaConfig();
-  const modules: PersonaModule[] = [
+export function getEnabledModules(): PresenceModule[] {
+  const config = getPresenceConfig();
+  const modules: PresenceModule[] = [
     {
       id: "blog",
       name: "Blog",

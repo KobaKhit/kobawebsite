@@ -5,7 +5,7 @@ import path from "path";
  * Load `.env` / `.env.local` into process.env for CLI (Next.js loads these itself).
  * Does not override existing process.env values.
  */
-export function loadPersonaEnv(cwd: string = process.cwd()): void {
+export function loadPresenceEnv(cwd: string = process.cwd()): void {
   for (const name of [".env", ".env.local"]) {
     const file = path.join(cwd, name);
     if (!fs.existsSync(file)) continue;

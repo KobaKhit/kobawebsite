@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 import { DeployBadge } from "./deploy-badge";
 
 export function SiteFooter() {
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
 
   return (
     <>
@@ -14,6 +14,16 @@ export function SiteFooter() {
               {config.fullName}
             </p>
             <p className="mt-1">{config.tagline}</p>
+            <p className="mt-2">
+              <a
+                href="https://github.com/KobaKhit/presence"
+                className="hover:text-accent"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Built with Presence
+              </a>
+            </p>
           </div>
           <div className="flex flex-wrap gap-4">
             {config.social.github && (

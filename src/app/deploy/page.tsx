@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 
-export const metadata: Metadata = { title: "Deploy Persona" };
+export const metadata: Metadata = { title: "Deploy Presence" };
 
 function vercelCloneUrl(templateRepoUrl: string): string {
   const params = new URLSearchParams({
     "repository-url": templateRepoUrl,
     env: "OPENROUTER_API_KEY",
     envDescription: "OpenRouter API key for chat and wiki compilation (OpenAI fallback also supported)",
-    "project-name": "my-persona",
-    "repository-name": "my-persona",
+    "project-name": "my-presence",
+    "repository-name": "my-presence",
   });
   return `https://vercel.com/new/clone?${params.toString()}`;
 }
 
 export default function DeployPage() {
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
   const templateRepoUrl = config.deploy?.templateRepoUrl?.trim() ?? "";
   const cloneUrl = templateRepoUrl ? vercelCloneUrl(templateRepoUrl) : null;
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-14 md:px-8">
       <h1 className="font-[family-name:var(--font-syne)] text-4xl tracking-tight text-ink md:text-5xl">
-        Deploy your Persona
+        Deploy your Presence
       </h1>
       <p className="mt-4 text-lg text-ink-soft">
         Fork this framework, drop your writing into <code>content/</code>, and ship a site with wiki, chat, API, and MCP.
@@ -61,7 +61,7 @@ export default function DeployPage() {
             <div className="mt-3 space-y-3 text-white/70">
               <p>
                 Set <code className="text-accent-bright">deploy.templateRepoUrl</code> in{" "}
-                <code className="text-accent-bright">content/persona.config.ts</code> to your published
+                <code className="text-accent-bright">content/presence.config.ts</code> to your published
                 GitHub template URL to enable the Vercel clone button.
               </p>
               <p className="text-sm">

@@ -7,7 +7,7 @@ import {
   BlogPostSummarySchema,
   ChatRequestSchema,
   ErrorSchema,
-  PersonaSchema,
+  PresenceSchema,
   ProjectSchema,
   ProjectSummarySchema,
   ResumeSchema,
@@ -23,7 +23,7 @@ import {
 
 const registry = new OpenAPIRegistry();
 
-registry.register("Persona", PersonaSchema);
+registry.register("Presence", PresenceSchema);
 registry.register("BlogPostSummary", BlogPostSummarySchema);
 registry.register("BlogPost", BlogPostSchema);
 registry.register("ProjectSummary", ProjectSummarySchema);
@@ -40,13 +40,13 @@ registry.register("Error", ErrorSchema);
 
 registry.registerPath({
   method: "get",
-  path: "/api/v1/persona",
-  summary: "Get persona identity",
-  tags: ["Persona"],
+  path: "/api/v1/presence",
+  summary: "Get Presence identity",
+  tags: ["Presence"],
   responses: {
     200: {
-      description: "Persona profile",
-      content: { "application/json": { schema: PersonaSchema } },
+      description: "Presence profile",
+      content: { "application/json": { schema: PresenceSchema } },
     },
   },
 });
@@ -299,14 +299,14 @@ export function generateOpenApiDocument() {
   return generator.generateDocument({
     openapi: "3.0.3",
     info: {
-      title: "Persona API",
+      title: "Presence API",
       version: "1.0.0",
       description:
-        "Stable headless API for a Persona personal site. Build alternate UIs against this contract. Knowledge endpoints read the compiled LLM Wiki with graph-expanded retrieval.",
+        "Stable headless API for a Presence personal site. Build alternate UIs against this contract. Knowledge endpoints read the compiled LLM Wiki with graph-expanded retrieval.",
     },
     servers: [{ url: "/" }],
     tags: [
-      { name: "Persona" },
+      { name: "Presence" },
       { name: "Blog" },
       { name: "Projects" },
       { name: "Resume" },

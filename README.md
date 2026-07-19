@@ -1,6 +1,8 @@
-# Persona
+﻿# Koba's Presence site
 
-Open-source **Next.js personal site framework** where the site is the front door, the API is a contract, and a compiled LLM Wiki powers search, chat, and MCP.
+This repository is **Koba Khitalishvili's** personal site, built on the open-source **[Presence](https://github.com/KobaKhit/presence)** framework — Next.js personal platform where the site is the front door, the API is a contract, and a compiled LLM Wiki powers search, chat, and MCP.
+
+Framework template: [https://github.com/KobaKhit/presence](https://github.com/KobaKhit/presence)
 
 > Fork → edit `content/` → deploy. Zero-config boot (SQLite vectors, no cloud DB required).
 
@@ -26,7 +28,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ### Scaffold a new site
 
 ```bash
-node packages/create-persona/bin/create-persona.js my-site
+node packages/create-presence/bin/create-presence.js my-site
 ```
 
 ### LLM (optional)
@@ -41,9 +43,9 @@ Fallback: `OPENAI_API_KEY`. With neither key, chat/search stay extractive (wiki-
 
 ## Customize
 
-1. Edit `content/persona.config.ts` (name, bio, theme, `deploy.templateRepoUrl`, social)
+1. Edit `content/presence.config.ts` (name, bio, theme, `deploy.templateRepoUrl`, social)
 2. Add content under `content/sources/entries/` with `type: post|project|visual` (single `.md`/`.html` or a folder with `index.md` + assets)
-3. Run `npm run persona -- compile`
+3. Run `npm run presence -- compile`
 4. Review wiki PRs from the GitHub Action before merging
 
 See [docs/entries.md](./docs/entries.md) for packaging details.
@@ -51,18 +53,20 @@ See [docs/entries.md](./docs/entries.md) for packaging details.
 ## CLI
 
 ```bash
-npm run persona -- compile          # LLM synthesis (if keyed) + graph + vectors
-npm run persona -- compile --no-llm # graph + vector reindex without synthesis
-npm run persona -- doctor           # orphans / missing links / contradictions
-npm run persona -- reindex          # graph + persist embeddings
-npm run persona -- ingest <url-or-file>
+npm run presence -- compile          # LLM synthesis (if keyed) + graph + vectors
+npm run presence -- compile --no-llm # graph + vector reindex without synthesis
+npm run presence -- doctor           # orphans / missing links / contradictions
+npm run presence -- reindex          # graph + persist embeddings
+npm run presence -- ingest <url-or-file>
 ```
+
+`npm run persona` still works as an alias for the same CLI.
 
 See [docs/](./docs/) for vector store and CI details.
 
 ## Deploy
 
-Set `deploy.templateRepoUrl` in `content/persona.config.ts` when your template repo is public. Until then, import the repo manually in Vercel / Railway / Render (`railway.json`, `render.yaml` included).
+Set `deploy.templateRepoUrl` in `content/presence.config.ts` when your template repo is public. Until then, import the repo manually in Vercel / Railway / Render (`railway.json`, `render.yaml` included).
 
 Live surfaces: `/deploy`, `/setup`, `/docs`.
 
@@ -73,17 +77,11 @@ content/          identity + sources + wiki
 data/             local vectors.sqlite (gitignored)
 src/lib/          config, KnowledgeProvider, llm/, vector-store
 src/app/          pages + /api/v1 + agent + mcp
-scripts/persona.ts
-packages/create-persona/
+scripts/presence.ts
+packages/create-presence/
 .github/workflows/wiki-compile.yml
 ```
 
-## Roadmap status
+## Upstream
 
-| Phase | Status |
-|---|---|
-| 0 Framework skeleton | ✅ |
-| 1 Knowledge compiler | ✅ incremental + contradictions + vectors |
-| 2 Surfaces (wiki, chat, search, save-back) | ✅ |
-| 3 Agent access (MCP, skills) | ✅ |
-| 4 Launch polish | ✅ scaffolder start, GH Action, docs, deploy config (no Ollama) |
+To sync framework improvements from the template, see [docs/upstream-sync.md](./docs/upstream-sync.md).

@@ -1,6 +1,6 @@
 import { createOpenAI, type OpenAIProvider } from "@ai-sdk/openai";
 import { embedMany, generateText, streamText, type LanguageModel } from "ai";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 
 export type LlmProviderId = "openrouter" | "openai" | "none";
 
@@ -30,19 +30,19 @@ const DEFAULT_OPENROUTER_EMBED = "openai/text-embedding-3-small";
 
 function siteMeta(): { siteUrl: string; siteTitle: string } {
   try {
-    const config = getPersonaConfig();
+    const config = getPresenceConfig();
     return {
       siteUrl: config.website || "http://localhost:3000",
-      siteTitle: config.fullName || config.name || "Persona",
+      siteTitle: config.fullName || config.name || "Presence",
     };
   } catch {
-    return { siteUrl: "http://localhost:3000", siteTitle: "Persona" };
+    return { siteUrl: "http://localhost:3000", siteTitle: "Presence" };
   }
 }
 
 function configModels(): { chat?: string; embedding?: string } {
   try {
-    const k = getPersonaConfig().knowledge;
+    const k = getPresenceConfig().knowledge;
     return { chat: k.chatModel, embedding: k.embeddingModel };
   } catch {
     return {};

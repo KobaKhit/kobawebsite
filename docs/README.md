@@ -1,6 +1,6 @@
-# Persona docs
+﻿# Presence docs
 
-Essential guides for forking and operating a Persona site. Also see `/deploy`, `/setup`, and `/llms.txt` on a running instance.
+Essential guides for forking and operating a Presence site. Also see `/deploy`, `/setup`, and `/llms.txt` on a running instance.
 
 | Doc | Topic |
 |---|---|
@@ -9,13 +9,16 @@ Essential guides for forking and operating a Persona site. Also see `/deploy`, `
 | [Vector store](./vector-store.md) | SQLite default, optional pgvector |
 | [Deploy](./deploy.md) | Vercel button, CI, env vars |
 | [Agents & MCP](./agents.md) | `/api/mcp`, skills, AG-UI agent |
+| [Upstream sync](./upstream-sync.md) | Pulling framework updates from KobaKhit/presence |
 
 ## Quick commands
 
 ```bash
-npm run persona -- compile          # LLM synthesis (if keyed) + graph + vectors
-npm run persona -- compile --no-llm # graph + vector reindex without synthesis
-npm run persona -- doctor           # orphans, missing links, contradictions
-npm run persona -- reindex          # graph + persist embeddings
-npm run persona -- ingest <url|file>
+npm run presence -- compile          # LLM synthesis (if keyed) + graph + vectors
+npm run presence -- compile --no-llm # graph + vector reindex without synthesis
+npm run presence -- doctor           # orphans, missing links, contradictions
+npm run presence -- reindex          # graph + persist embeddings
+npm run presence -- ingest <url|file>
 ```
+
+`npm run persona` still works as an alias.

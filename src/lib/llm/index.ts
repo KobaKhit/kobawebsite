@@ -1,4 +1,4 @@
-export { loadPersonaEnv } from "./env";
+export { loadPresenceEnv } from "./env";
 export {
   resolveLlm,
   getLlmStatus,

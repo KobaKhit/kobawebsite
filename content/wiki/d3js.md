@@ -1,4 +1,4 @@
----
+﻿---
 title: D3.js
 summary: >-
   A JavaScript library for producing dynamic, interactive data visualizations in
@@ -14,10 +14,10 @@ D3 is the visualization layer behind *Court Vision Charts*: interactive hexbin s
 
 ## Why it matters here
 
-The lineup **link diagram** habit — entities as nodes, relationships as edges — directly informs Persona's public wiki graph. Exploring [[nba-analytics]] relationships and [[llm-wiki]] pages uses the same visual language.
+The lineup **link diagram** habit — entities as nodes, relationships as edges — directly informs Presence's public wiki graph. Exploring [[nba-analytics]] relationships and [[llm-wiki]] pages uses the same visual language.
 
 ## Related
 
 - [[nba-analytics]]
-- [[persona-framework]]
+- [[presence-framework]]
 - [[koba-career]]

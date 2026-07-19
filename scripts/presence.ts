@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Persona CLI — compile · doctor · reindex · ingest
- * Usage: npx tsx scripts/persona.ts <command>
+ * Presence CLI — compile · doctor · reindex · ingest
+ * Usage: npx tsx scripts/presence.ts <command>
  */
 import fs from "fs/promises";
 import path from "path";
 import { Command } from "commander";
 import matter from "gray-matter";
-import { loadPersonaEnv } from "../src/lib/llm/env";
+import { loadPresenceEnv } from "../src/lib/llm/env";
 import {
   describeLlmForHumans,
   getLlmStatus,
@@ -15,7 +15,7 @@ import {
 } from "../src/lib/llm";
 import { reindexEmbeddings } from "../src/lib/knowledge/reindex";
 
-loadPersonaEnv();
+loadPresenceEnv();
 
 const ROOT = process.cwd();
 const CONTENT = path.join(ROOT, "content");
@@ -283,7 +283,7 @@ async function ingest(target: string) {
 }
 
 const program = new Command();
-program.name("persona").description("Persona knowledge CLI").version("0.1.0");
+program.name("presence").description("Presence knowledge CLI").version("0.1.0");
 program
   .command("compile")
   .description("Build wiki pages (LLM when keyed) + link graph + vector reindex")

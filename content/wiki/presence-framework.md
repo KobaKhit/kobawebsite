@@ -1,25 +1,25 @@
----
-title: Persona Framework
+﻿---
+title: Presence Framework
 summary: >-
-  Persona is the framework powering this site — a forkable Next.js personal site
+  Presence is the framework powering this site — a forkable Next.js personal site
   where: - The site is the **front door** - `/api/v1` is a **stable contract**
   (OpenAPI, `/llms.txt`, skills) - A compiled **LLM Wiki** compounds knowledge
   for search, chat, MCP, and agent surfaces.
 type: entity
 sources:
-  - projects/persona
+  - projects/presence
 updated: '2026-07-19'
 ---
-# Persona Framework
+# Presence Framework
 
-**Persona** is a forkable personal platform: beautiful pages on the outside, a versioned `/api/v1` contract and MCP endpoint underneath, and a compiled wiki that powers search and chat.
+**Presence** is a forkable personal platform: beautiful pages on the outside, a versioned `/api/v1` contract and MCP endpoint underneath, and a compiled wiki that powers search and chat.
 
 ## Architecture (compressed)
 
 - `content/sources/` — immutable intake
 - `content/wiki/` — LLM-maintained compiled pages with dense wiki-links
 - `KnowledgeProvider` — hybrid search with graph expansion (wiki first, sources second)
-- Modules for blog, projects, resume, wiki, chat, search — toggled in `persona.config.ts`
+- Modules for blog, projects, resume, wiki, chat, search — toggled in `presence.config.ts`
 
 ## Design pillars
 

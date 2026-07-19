@@ -1,5 +1,5 @@
-import { getKnowledgeProvider } from "@/lib/knowledge";
-import { getPersonaConfig } from "@/lib/config";
+﻿import { getKnowledgeProvider } from "@/lib/knowledge";
+import { getPresenceConfig } from "@/lib/config";
 import { llmGenerateText, getLlmStatus } from "@/lib/llm";
 
 export const runtime = "nodejs";
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         );
       };
 
-      send("RUN_STARTED", { threadId: "persona", runId: crypto.randomUUID() });
+      send("RUN_STARTED", { threadId: "presence", runId: crypto.randomUUID() });
 
       const provider = getKnowledgeProvider();
       send("TOOL_CALL_START", { toolCallId: "1", toolCallName: "search_knowledge" });
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
         })),
       });
 
-      const config = getPersonaConfig();
+      const config = getPresenceConfig();
       const contextBlock = ctx.documents
         .slice(0, 6)
         .map(
@@ -86,9 +86,9 @@ Answer from wiki/source context. Be concise; cite page titles.`,
       }
       send("TEXT_MESSAGE_END", { messageId: "m1" });
       send("RUN_FINISHED", {
-        threadId: "persona",
+        threadId: "presence",
         runId: "done",
-        persona: config.name,
+        presence: config.name,
         provider: status.provider,
       });
       controller.close();
@@ -116,7 +116,7 @@ function extractiveReply(
 ): string {
   const top = documents.filter((d) => d.kind === "wiki").slice(0, 3);
   if (top.length === 0) {
-    return `No strong wiki matches for “${message}”. Try /wiki or ask about optimization, NBA analytics, or Persona.`;
+    return `No strong wiki matches for “${message}”. Try /wiki or ask about optimization, NBA analytics, or Presence.`;
   }
   return [
     `Grounded answer from the compiled wiki:`,

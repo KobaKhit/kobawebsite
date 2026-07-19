@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 
 const links = [
   { href: "/blog", label: "Blog" },
@@ -11,7 +11,7 @@ const links = [
 ];
 
 export function SiteHeader() {
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
 
   return (
     <header className="relative z-20 border-b border-line/80 bg-white/40 backdrop-blur-md">
@@ -19,9 +19,6 @@ export function SiteHeader() {
         <Link href="/" className="group flex items-baseline gap-2">
           <span className="font-[family-name:var(--font-syne)] text-xl font-bold tracking-tight text-ink md:text-2xl">
             {config.name}
-          </span>
-          <span className="hidden text-xs uppercase tracking-[0.18em] text-muted sm:inline">
-            persona
           </span>
         </Link>
         <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 text-sm text-ink-soft md:gap-x-6">

@@ -1,4 +1,4 @@
----
+﻿---
 title: Koba Khitalishvili's Career
 summary: >-
   An overview of Koba Khitalishvili's professional experience and contributions
@@ -6,7 +6,7 @@ summary: >-
 type: entity
 sources:
   - resume.md
-  - projects/persona
+  - projects/presence
   - resume
 updated: '2026-07-19'
 ---
@@ -18,11 +18,11 @@ Koba Khitalishvili is a data scientist and analytics engineer with experience in
 
 - Early corpus: [[nba-analytics]] and [[linear-optimization]] for lineup and credit-assignment problems
 - Visualization craft via [[d3js]]
-- Current: [[persona-framework]] productizing an [[llm-wiki]] so a personal site compounds memory for humans and agents
+- Current: [[presence-framework]] productizing an [[llm-wiki]] so a personal site compounds memory for humans and agents
 
 ## Experience
 
-- **Independent / open source** — Building Persona, a Next.js personal site framework with an LLM Wiki knowledge layer (2026–).
+- **Independent / open source** — Building Presence, a Next.js personal site framework with an LLM Wiki knowledge layer (2026–).
 - **Sports analytics** — Forecasting, adjusted plus-minus, and lineup optimization for basketball applications (2013–2016 corpus; ongoing interest).
 - **Data visualization** — D3-based exploratory tools for shot charts and lineup networks.
 
@@ -39,4 +39,4 @@ Koba Khitalishvili is a data scientist and analytics engineer with experience in
 
 ## Contact & identity
 
-Canonical identity lives in `content/persona.config.ts` and `content/sources/resume.md`. Agents should prefer `/api/v1/persona` and `/api/v1/resume`.
+Canonical identity lives in `content/presence.config.ts` and `content/sources/resume.md`. Agents should prefer `/api/v1/presence` and `/api/v1/resume`.

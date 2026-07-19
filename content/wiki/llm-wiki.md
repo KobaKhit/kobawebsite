@@ -1,4 +1,4 @@
----
+﻿---
 title: LLM Wiki
 summary: >-
   A personal knowledge management system that compiles and organizes information
@@ -6,7 +6,7 @@ summary: >-
 type: hub
 sources:
   - blog/personal-wikis-beat-rag
-  - projects/persona
+  - projects/presence
 updated: '2026-07-19'
 ---
 # LLM Wiki
@@ -21,16 +21,16 @@ The **LLM Wiki** pattern treats personal writing like source code: an agent *com
 
 ## Retrieval
 
-At query time, [[persona-framework]] seeds matches with lexical/vector search, then expands 1–2 hops on the link graph. That yields multi-hop answers — e.g. how [[linear-optimization]] influenced [[nba-analytics]] — that naive RAG misses.
+At query time, [[presence-framework]] seeds matches with lexical/vector search, then expands 1–2 hops on the link graph. That yields multi-hop answers — e.g. how [[linear-optimization]] influenced [[nba-analytics]] — that naive RAG misses.
 
 ## Related
 
 - [[index]]
-- [[persona-framework]]
+- [[presence-framework]]
 - [[koba-career]]
 
 
-Existing wiki slugs: d3js, index, koba-career, linear-optimization, llm-wiki, nba-analytics, persona-framework, adjusted-plus-minus, nba-lineup-optimizer
+Existing wiki slugs: d3js, index, koba-career, linear-optimization, llm-wiki, nba-analytics, presence-framework, adjusted-plus-minus, nba-lineup-optimizer
 
 Corpus excerpt (authoritative):
 ### SOURCE blog/linear-optimization-lineups
@@ -53,7 +53,7 @@ Standard RAG retrieves random chunks. It has no sense that your 2015 optimizatio
 
 An **LLM Wiki** flips the timeline: at ingest time, an agent extracts entities, writes dense concept pages, and densifies `[[wiki-links]]`. Query time becomes retrieval over a pre-compiled graph — wiki pages first, source excerpts second, with 1–2 hop expansion along links.
 
-That is the knowledge layer behind Persona. Sources stay immutable; the wiki is the compiled artifact; contradictions and orphans surface in `persona doctor`.
+That is the knowledge layer behind Presence. Sources stay immutable; the wiki is the compiled artifact; contradictions and orphans surface in `presence doctor`.
 
 ---
 
@@ -77,7 +77,7 @@ title: Court Vision Charts
 
 Interactive D3 charts for basketball analytics: hexbin shot charts, player–player link diagrams for lineups, and small-multiples for rolling plus-minus.
 
-The lineup network work later informed how Persona renders its **wiki link graph** — same instinct: nodes as entities, edges as relationships, interaction for exploration.
+The lineup network work later informed how Presence renders its **wiki link graph** — same instinct: nodes as entities, edges as relationships, interaction for exploration.
 
 ---
 
@@ -90,10 +90,10 @@ Key pieces: projection CSV ingest, constraint DSL, CBC/PuLP solve path, and a sm
 
 ---
 
-### SOURCE projects/persona
-title: Persona
+### SOURCE projects/presence
+title: Presence
 
-**Persona** is a forkable personal site: beautiful pages on the outside, a versioned `/api/v1` contract and MCP endpoint underneath, and a compiled wiki that powers search and chat.
+**Presence** is a forkable personal site: beautiful pages on the outside, a versioned `/api/v1` contract and MCP endpoint underneath, and a compiled wiki that powers search and chat.
 
 ### Design pillars
 
@@ -113,7 +113,7 @@ title: resume
 
 ## Experience
 
-- **Independent / open source** — Building Persona, a Next.js personal site framework with an LLM Wiki knowledge layer (2026–).
+- **Independent / open source** — Building Presence, a Next.js personal site framework with an LLM Wiki knowledge layer (2026–).
 - **Sports analytics** — Forecasting, adjusted plus-minus, and lineup optimization for basketball applications (2013–2016 corpus; ongoing interest).
 - **Data visualization** — D3-based exploratory tools for shot charts and lineup networks.
 

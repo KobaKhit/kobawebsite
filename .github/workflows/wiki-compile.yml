@@ -1,4 +1,4 @@
-name: Persona wiki compile
+﻿name: Presence wiki compile
 
 # Compiles the wiki graph (and optionally LLM synthesis) then opens/updates a PR.
 # Human-in-the-loop: never push wiki changes straight to main.
@@ -65,17 +65,17 @@ jobs:
             fi
           else
             # Default / schedule / source push: graph-only unless a key is present and
-            # repo var PERSONA_CI_LLM=true is set (opt-in spend).
-            if [ "${{ vars.PERSONA_CI_LLM }}" = "true" ] && { [ -n "$OPENROUTER_API_KEY" ] || [ -n "$OPENAI_API_KEY" ]; }; then
-              echo "PERSONA_CI_LLM=true — running LLM synthesis"
+            # repo var PRESENCE_CI_LLM=true or PERSONA_CI_LLM=true is set (opt-in spend).
+            if { [ "${{ vars.PRESENCE_CI_LLM }}" = "true" ] || [ "${{ vars.PERSONA_CI_LLM }}" = "true" ]; } && { [ -n "$OPENROUTER_API_KEY" ] || [ -n "$OPENAI_API_KEY" ]; }; then
+              echo "CI LLM opt-in — running LLM synthesis"
             else
               EXTRA="--no-llm"
             fi
           fi
-          npm run persona -- compile $EXTRA --no-reindex
+          npm run presence -- compile $EXTRA --no-reindex
 
       - name: Doctor report
-        run: npm run persona -- doctor
+        run: npm run presence -- doctor
 
       - name: Open or update PR
         uses: peter-evans/create-pull-request@v6
@@ -86,7 +86,7 @@ jobs:
             Automated wiki maintenance from `content/sources` changes (or schedule/manual).
 
             - Rebuilds `content/wiki-graph.json` from `[[wiki-links]]`
-            - LLM page synthesis runs only when secrets + opt-in (`PERSONA_CI_LLM` or workflow `use_llm`) are set
+            - LLM page synthesis runs only when secrets + opt-in (`PRESENCE_CI_LLM` / `PERSONA_CI_LLM` or workflow `use_llm`) are set
             - Review wiki markdown before merge — human-in-the-loop on knowledge
 
             Trigger: `${{ github.event_name }}`

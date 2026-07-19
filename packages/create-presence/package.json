@@ -1,16 +1,16 @@
 {
-  "name": "create-persona",
+  "name": "create-presence",
   "version": "0.1.0",
-  "description": "Scaffold a Persona personal site (Next.js + LLM Wiki)",
+  "description": "Scaffold a Presence personal site (Next.js + LLM Wiki)",
   "bin": {
-    "create-persona": "./bin/create-persona.js"
+    "create-presence": "./bin/create-presence.js"
   },
   "files": [
     "bin",
     "README.md"
   ],
   "keywords": [
-    "persona",
+    "presence",
     "nextjs",
     "wiki",
     "scaffolder"

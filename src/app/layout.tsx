@@ -3,7 +3,7 @@ import { JetBrains_Mono, Manrope, Syne } from "next/font/google";
 import { FloatingChat } from "@/components/floating-chat";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 import "./globals.css";
 
 const syne = Syne({
@@ -23,11 +23,11 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
-const config = getPersonaConfig();
+const config = getPresenceConfig();
 
 export const metadata: Metadata = {
   title: {
-    default: `${config.fullName} · Persona`,
+    default: config.fullName,
     template: `%s · ${config.name}`,
   },
   description: config.tagline,

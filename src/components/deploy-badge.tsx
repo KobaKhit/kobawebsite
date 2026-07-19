@@ -8,7 +8,7 @@ export function DeployBadge({ enabled }: { enabled: boolean }) {
 
   useEffect(() => {
     if (!enabled) return;
-    const key = "persona-deploy-badge-dismissed";
+    const key = "presence-deploy-badge-dismissed";
     setDismissed(localStorage.getItem(key) === "1");
   }, [enabled]);
 
@@ -17,7 +17,7 @@ export function DeployBadge({ enabled }: { enabled: boolean }) {
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 mx-auto flex max-w-lg items-center justify-between gap-3 rounded-2xl border border-line bg-white/90 px-4 py-3 shadow-[var(--shadow)] backdrop-blur md:left-auto md:right-6">
       <p className="text-sm text-ink-soft">
-        <span className="font-semibold text-ink">Powered by Persona</span>
+        <span className="font-semibold text-ink">Powered by Presence</span>
         {" — "}
         <Link href="/deploy" className="text-accent underline-offset-2 hover:underline">
           deploy yours
@@ -28,7 +28,7 @@ export function DeployBadge({ enabled }: { enabled: boolean }) {
         aria-label="Dismiss"
         className="rounded-lg px-2 py-1 text-muted hover:bg-paper-deep"
         onClick={() => {
-          localStorage.setItem("persona-deploy-badge-dismissed", "1");
+          localStorage.setItem("presence-deploy-badge-dismissed", "1");
           setDismissed(true);
         }}
       >

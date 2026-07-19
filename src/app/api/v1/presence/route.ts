@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 
 export const dynamic = "force-static";
 
 export async function GET() {
-  const c = getPersonaConfig();
+  const c = getPresenceConfig();
   return NextResponse.json({
     name: c.name,
     fullName: c.fullName,

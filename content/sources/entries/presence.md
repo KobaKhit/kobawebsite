@@ -1,6 +1,6 @@
----
+﻿---
 type: project
-title: "Persona"
+title: "Presence"
 date: "2026-07-01"
 summary: "An open-source Next.js personal site framework with a compounding LLM Wiki knowledge layer, versioned API, MCP/agent surfaces, and OpenRouter-first LLM integration."
 tags: ["nextjs", "open-source", "ai", "knowledge-management"]
@@ -8,7 +8,7 @@ status: active
 featured: true
 ---
 
-Persona is the framework powering this site — a forkable Next.js personal site where:
+Presence is the framework powering this site — a forkable Next.js personal site where:
 
 - The site is the **front door**
 - `/api/v1` is a **stable contract** (OpenAPI, `/llms.txt`, skills)
@@ -17,7 +17,7 @@ Persona is the framework powering this site — a forkable Next.js personal site
 ## How it works
 
 1. Write in `content/sources/` — blog posts, projects, resume (immutable)
-2. Run `persona compile` — entity extraction + wiki page generation via OpenRouter/OpenAI
+2. Run `presence compile` — entity extraction + wiki page generation via OpenRouter/OpenAI
 3. Search, chat, and agent surfaces are automatically grounded in the wiki
 
 ## Stack
@@ -35,4 +35,4 @@ Persona is the framework powering this site — a forkable Next.js personal site
 - `/api/mcp` — MCP tool endpoint
 - `/api/agent` — SSE agent streaming
 
-[GitHub](https://github.com/kobakhit/persona)
+[GitHub](https://github.com/KobaKhit/presence)

@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import { getBlogPosts, getProjects, getResume, getWikiPage, getWikiPages } from "@/lib/content/loaders";
-import { getPersonaConfig } from "@/lib/config";
+import { getPresenceConfig } from "@/lib/config";
 import { getKnowledgeProvider } from "@/lib/knowledge";
 
 export const runtime = "nodejs";
 
 const TOOLS = [
   {
-    name: "get_persona",
+    name: "get_presence",
     description: "Get site owner identity (name, bio, social)",
     inputSchema: { type: "object", properties: {} },
   },
@@ -112,9 +112,9 @@ export async function POST(request: Request) {
       result: {
         protocolVersion: "2024-11-05",
         capabilities: { tools: { listChanged: false } },
-        serverInfo: { name: "persona-mcp", version: "0.2.0" },
+        serverInfo: { name: "presence-mcp", version: "0.2.0" },
         instructions:
-          "Persona personal site MCP. Prefer search_knowledge and get_wiki_page for grounded answers.",
+          "Presence personal site MCP. Prefer search_knowledge and get_wiki_page for grounded answers.",
       },
     });
   }
@@ -165,7 +165,7 @@ export async function POST(request: Request) {
 
 export async function GET() {
   return NextResponse.json({
-    name: "persona-mcp",
+    name: "presence-mcp",
     version: "0.2.0",
     transport: "json-rpc-over-http",
     endpoint: "/api/mcp",
@@ -174,9 +174,9 @@ export async function GET() {
 }
 
 async function callTool(name: string, args: Record<string, unknown>, request: Request) {
-  const config = getPersonaConfig();
+  const config = getPresenceConfig();
   switch (name) {
-    case "get_persona":
+    case "get_presence":
       return {
         name: config.name,
         fullName: config.fullName,
@@ -246,7 +246,7 @@ async function callTool(name: string, args: Record<string, unknown>, request: Re
         ok: true,
         email,
         mailto,
-        note: "Persona does not send email; open the mailto link or copy the payload.",
+        note: "Presence does not send email; open the mailto link or copy the payload.",
       };
     }
     default:

@@ -1,14 +1,16 @@
 {
-  "name": "persona",
+  "name": "presence",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "persona": "tsx scripts/persona.ts",
-    "create-persona": "node packages/create-persona/bin/create-persona.js"
+    "presence": "tsx scripts/presence.ts",
+    "persona": "tsx scripts/presence.ts",
+    "create-presence": "node packages/create-presence/bin/create-presence.js"
   },
   "optionalDependencies": {
     "pg": "^8.16.3"

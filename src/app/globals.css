@@ -74,20 +74,20 @@ a {
   background: rgba(20, 184, 166, 0.28);
 }
 
-.prose-persona {
+.prose-presence {
   font-size: 1.0625rem;
   line-height: 1.8;
   color: var(--ink-soft);
 }
 
-.prose-persona > *:first-child {
+.prose-presence > *:first-child {
   margin-top: 0;
 }
 
-.prose-persona h1,
-.prose-persona h2,
-.prose-persona h3,
-.prose-persona h4 {
+.prose-presence h1,
+.prose-presence h2,
+.prose-presence h3,
+.prose-presence h4 {
   font-family: var(--font-syne), sans-serif;
   color: var(--ink);
   letter-spacing: -0.02em;
@@ -97,34 +97,34 @@ a {
   margin-bottom: 0.65em;
 }
 
-.prose-persona h1 {
+.prose-presence h1 {
   font-size: 1.85rem;
 }
 
-.prose-persona h2 {
+.prose-presence h2 {
   font-size: 1.45rem;
 }
 
-.prose-persona h3 {
+.prose-presence h3 {
   font-size: 1.2rem;
 }
 
-.prose-persona p {
+.prose-presence p {
   margin: 1.1em 0;
 }
 
-.prose-persona a {
+.prose-presence a {
   color: var(--accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
-.prose-persona a:hover {
+.prose-presence a:hover {
   color: var(--accent-bright);
 }
 
-.prose-persona code {
+.prose-presence code {
   font-family: var(--font-jetbrains), monospace;
   font-size: 0.88em;
   background: rgba(15, 118, 110, 0.1);
@@ -133,7 +133,7 @@ a {
   color: var(--ink);
 }
 
-.prose-persona pre {
+.prose-presence pre {
   overflow-x: auto;
   margin: 1.5em 0;
   padding: 1.15rem 1.25rem;
@@ -144,7 +144,7 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.prose-persona pre code {
+.prose-presence pre code {
   background: transparent;
   padding: 0;
   color: inherit;
@@ -152,22 +152,22 @@ a {
   line-height: 1.65;
 }
 
-.prose-persona ul,
-.prose-persona ol {
+.prose-presence ul,
+.prose-presence ol {
   margin: 1.1em 0;
   padding-left: 1.4rem;
 }
 
-.prose-persona li {
+.prose-presence li {
   margin: 0.35em 0;
 }
 
-.prose-persona li > ul,
-.prose-persona li > ol {
+.prose-presence li > ul,
+.prose-presence li > ol {
   margin: 0.25em 0;
 }
 
-.prose-persona blockquote {
+.prose-presence blockquote {
   margin: 1.5em 0;
   padding: 0.25em 0 0.25em 1.15rem;
   border-left: 3px solid var(--accent);
@@ -175,13 +175,13 @@ a {
   font-style: italic;
 }
 
-.prose-persona hr {
+.prose-presence hr {
   margin: 2.5em 0;
   border: none;
   border-top: 1px solid var(--line);
 }
 
-.prose-persona img {
+.prose-presence img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -189,27 +189,27 @@ a {
   border-radius: 12px;
 }
 
-.prose-persona table {
+.prose-presence table {
   width: 100%;
   margin: 1.5em 0;
   border-collapse: collapse;
   font-size: 0.95rem;
 }
 
-.prose-persona th,
-.prose-persona td {
+.prose-presence th,
+.prose-presence td {
   border-bottom: 1px solid var(--line);
   padding: 0.65rem 0.75rem;
   text-align: left;
 }
 
-.prose-persona th {
+.prose-presence th {
   font-family: var(--font-syne), sans-serif;
   color: var(--ink);
   font-weight: 600;
 }
 
-.prose-persona iframe {
+.prose-presence iframe {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -223,17 +223,17 @@ a {
   max-width: 46rem;
 }
 
-.blog-prose .prose-persona {
+.blog-prose .prose-presence {
   font-size: 1.125rem;
   line-height: 1.85;
 }
 
 @media (min-width: 768px) {
-  .blog-prose .prose-persona {
+  .blog-prose .prose-presence {
     font-size: 1.1875rem;
   }
 
-  .blog-prose .prose-persona h2 {
+  .blog-prose .prose-presence h2 {
     font-size: 1.6rem;
   }
 }

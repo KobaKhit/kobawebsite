@@ -1,6 +1,6 @@
 import type { ZodType } from "zod";
 
-export interface PersonaModule {
+export interface PresenceModule {
   id: string;
   name: string;
   description: string;
@@ -13,4 +13,4 @@ export interface PersonaModule {
   skillPath?: string;
 }
 
-export type ModuleRegistry = Record<string, PersonaModule>;
+export type ModuleRegistry = Record<string, PresenceModule>;

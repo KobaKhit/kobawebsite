@@ -13,7 +13,7 @@
 
 ## MCP tools
 
-- `get_persona`
+- `get_presence`
 - `get_resume`
 - `list_projects` / `list_blog_posts`
 - `list_wiki_pages` / `get_wiki_page`
