@@ -5,10 +5,6 @@ summary: >-
   strategy in the NBA.
 type: hub
 sources:
-  - blog/plus-minus-without-fools
-  - blog/linear-optimization-lineups
-  - projects/nba-lineup-optimizer
-  - projects/court-vision-charts
   - blog/2016-02-18-linear-opt-baseball
   - blog/2016-03-06-indego-bike-folium
 updated: '2026-07-19'

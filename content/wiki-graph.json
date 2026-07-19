@@ -21,11 +21,6 @@
       "type": "hub"
     },
     {
-      "id": "kebab-case",
-      "title": "Kebab Case",
-      "type": "concept"
-    },
-    {
       "id": "koba-career",
       "title": "Koba Khitalishvili's Career",
       "type": "entity"

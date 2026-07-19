@@ -1,11 +1,11 @@
-﻿---
+---
 title: D3.js
 summary: >-
   A JavaScript library for producing dynamic, interactive data visualizations in
   web browsers.
 type: entity
 sources:
-  - projects/court-vision-charts
+  - visuals/nba-3pt-spiral
 updated: '2026-07-19'
 ---
 # D3.js

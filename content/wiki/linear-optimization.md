@@ -5,8 +5,6 @@ summary: >-
   given mathematical model.
 type: concept
 sources:
-  - blog/linear-optimization-lineups
-  - projects/nba-lineup-optimizer
   - blog/2016-02-18-linear-opt-baseball
 updated: '2026-07-19'
 ---

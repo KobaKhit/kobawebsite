@@ -5,7 +5,7 @@ summary: >-
   NBA.
 type: concept
 sources:
-  - projects/nba-3pt-spiral
+  - visuals/nba-3pt-spiral
 updated: '2026-07-19'
 ---
 # NBA 3-Point Evolution

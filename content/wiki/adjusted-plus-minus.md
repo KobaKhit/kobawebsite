@@ -4,10 +4,7 @@ summary: >-
   A basketball statistic that attempts to measure a player's impact on the game
   by accounting for teammates and opponents.
 type: concept
-sources:
-  - blog/plus-minus-without-fools
-  - blog/linear-optimization-lineups
-  - projects/nba-lineup-optimizer
+sources: []
 updated: '2026-07-19'
 ---
 # Adjusted Plus-Minus

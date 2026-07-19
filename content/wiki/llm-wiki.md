@@ -1,11 +1,10 @@
-﻿---
+---
 title: LLM Wiki
 summary: >-
   A personal knowledge management system that compiles and organizes information
   into a structured wiki format.
 type: hub
 sources:
-  - blog/personal-wikis-beat-rag
   - projects/presence
 updated: '2026-07-19'
 ---

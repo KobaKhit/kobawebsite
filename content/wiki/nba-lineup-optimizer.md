@@ -5,7 +5,6 @@ summary: >-
   statistics.
 type: entity
 sources:
-  - projects/nba-lineup-optimizer
   - blog/2016-02-18-linear-opt-baseball
 updated: '2026-07-19'
 ---
