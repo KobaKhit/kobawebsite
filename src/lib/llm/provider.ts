@@ -206,7 +206,7 @@ export async function llmStreamText(options: {
 
   return {
     textStream: result.textStream,
-    text: result.text,
+    text: Promise.resolve(result.text),
     provider: llm.provider,
     model: llm.chatModel,
   };
