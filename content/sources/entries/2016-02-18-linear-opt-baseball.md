@@ -1,74 +1,267 @@
 ---
-type: post
 title: "Linear optimization and baseball teams"
+type: post
 date: "2016-02-18"
-summary: "Using Integer Linear Programming to build an optimal 25-man MLB roster from 2015 season player data."
-tags: ["r", "linear-optimization", "baseball", "operations-research"]
+summary: "We try to use Integer Linear Programming to build a perfect 25 men roster baseball team."
+tags: ["r", "opr", "linear-optimization", "integer", "datatable", "rmarkdown"]
 ---
 
-*Co-authored with [Jordan McIntyre](https://www.linkedin.com/in/mcintyrejordan) and [Manish Sharma](https://www.linkedin.com/in/manish-sharma-50318a34).*
+Co-authored with [Jordan McIntyre](https://www.linkedin.com/in/mcintyrejordan), [Manish Sharma](https://www.linkedin.com/in/manish-sharma-50318a34), and [Koba Khitalishvili](http://www.kobakhit.com/about/).
 
-Full R Markdown report on RPubs: [rpubs.com/Koba/linear-opt-baseball](http://rpubs.com/Koba/linear-opt-baseball)
+Full report on RPubs: [http://rpubs.com/Koba/linear-opt-baseball](http://rpubs.com/Koba/linear-opt-baseball)
 
-Source: [download zip](/ipynb/2016-2-18-linear-opt-baseball.zip) | [Reddit thread](https://redd.it/49mfxu)
+Source: [download zip](/ipynb/2016-2-18-linear-opt-baseball.zip) · [Reddit thread](https://redd.it/49mfxu)
 
-> **Edit:** The choice of statistics for our utility index is almost random. The main goal was to model the general constraints and objective function. This code allows you to easily add desired statistics and extend to more sophisticated preferences — e.g. using a weight vector.
+> **Edit:** The choice of statistics for our utility index is almost random. The main goal was to model the general constraints and objective function. This code allows to easily add desired statistics and extend the general case to include more sophisticated preferences, for example using the weight vector.
 
-## Problem
+**Best 25-man team**
 
-Can Integer Linear Programming (ILP) select a reasonable 25-man MLB roster? Given 2015 player data, we build an ILP model that maximizes a composite utility score subject to:
+| # | Salary | Name | POS | Team | Off.norm | Def.norm |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 31,000,000 | Clayton Kershaw | SP |  | 0.2327 | 0.3713 |
+| 2 | 19,750,000 | David Price | SP |  | 0.2327 | 0.3713 |
+| 3 | 17,277,777 | Buster Posey | C | Giants | 0.4901 | 0.5324 |
+| 4 | 17,142,857 | Max Scherzer | SP |  | 0.2327 | 0.3713 |
+| 5 | 14,000,000 | Joey Votto | 1B | Reds | 0.8000 | 0.1886 |
+| 6 | 10,500,000 | Yoenis Cespedes | OF | - - - | 0.5416 | 0.5796 |
+| 7 | 8,050,000 | Aroldis Chapman | Closer | Reds | 0.2327 | 0.3713 |
+| 9 | 7,000,000 | Russell Martin | C | Blue Jays | 0.2693 | 0.6110 |
+| 8 | 7,000,000 | Wade Davis | Closer | Royals | 0.2327 | 0.3713 |
+| 10 | 6,083,333 | Mike Trout | OF | Angels | 0.8307 | 0.4126 |
+| 11 | 6,000,000 | Chris Sale | SP |  | 0.2327 | 0.3713 |
+| 12 | 4,300,000 | Josh Donaldson | 3B | Blue Jays | 0.7109 | 0.5815 |
+| 13 | 3,630,000 | Jake Arrieta | SP |  | 0.2327 | 0.3713 |
+| 14 | 3,200,000 | Zach Britton | Closer | Orioles | 0.2327 | 0.3713 |
+| 15 | 3,083,333 | Paul Goldschmidt | 1B | Diamondbacks | 0.7772 | 0.2358 |
+| 16 | 2,725,000 | Lorenzo Cain | OF | Royals | 0.4921 | 0.6798 |
+| 18 | 2,500,000 | Dee Gordon | 2B | Marlins | 0.3772 | 0.5403 |
+| 17 | 2,500,000 | Bryce Harper | OF | Nationals | 1.0000 | 0.2043 |
+| 19 | 547,100 | Cody Allen | Closer | Indians | 0.2327 | 0.3713 |
+| 20 | 543,000 | Xander Bogaerts | SS | Red Sox | 0.3396 | 0.5285 |
+| 21 | 535,000 | Trevor Rosenthal | Closer | Cardinals | 0.2327 | 0.3713 |
+| 22 | 519,500 | A.J. Pollock | OF | Diamondbacks | 0.5505 | 0.5422 |
+| 23 | 509,500 | Carson Smith | Closer | Mariners | 0.2327 | 0.3713 |
+| 24 | 509,000 | Matt Duffy | 2B | Giants | 0.3911 | 0.5972 |
+| 25 | 507,500 | Dellin Betances | Closer | Yankees | 0.2327 | 0.3713 |
 
-- Roster size: exactly 25 players
-- Position constraints (pitchers, catchers, infielders, outfielders)
-- Salary cap
+We try to use Integer Linear Programming to build a perfect 25 men roster baseball team. We present our best team below which is the solution of the ILP model we built using the 2015 MLB season player data. If you understand baseball please evaluate our resulting baseball team and drop a comment, so that we know whether ILP can be used to get a decent baseball team. After the table I describe how we arrived at our solution.
 
-## Utility index
+*[Interactive DataTable omitted]*
 
-We normalized offensive and defensive statistics to [0, 1] and combined them into a single utility score:
-
-$$u_i = w_{off} \cdot \text{off\_norm}_i + w_{def} \cdot \text{def\_norm}_i$$
-
-## The resulting best 25-man team
-
-| Name | Position | Team | Salary | Off. | Def. |
-|---|---|---|---|---|---|
-| Clayton Kershaw | SP | — | $31,000,000 | 0.23 | 0.37 |
-| David Price | SP | — | $19,750,000 | 0.23 | 0.37 |
-| Buster Posey | C | Giants | $17,277,777 | 0.49 | 0.53 |
-| Max Scherzer | SP | — | $17,142,857 | 0.23 | 0.37 |
-| Joey Votto | 1B | Reds | $14,000,000 | 0.80 | 0.19 |
-| Yoenis Cespedes | OF | — | $10,500,000 | 0.54 | 0.58 |
-| Aroldis Chapman | Closer | Reds | $8,050,000 | 0.23 | 0.37 |
-| Mike Trout | OF | Angels | $7,000,000 | 1.00 | 0.41 |
-| Bryce Harper | OF | Nationals | $2,500,000 | 1.00 | 0.20 |
-| Dee Gordon | 2B | Marlins | $2,500,000 | 0.38 | 0.54 |
-| *…and 15 more* | | | | | |
-
-## R implementation
+# Data preprocessing
+Let's read in the 2015 regular season player level data. 
 
 ```r
-library(lpSolve)
-
-# Objective: maximize utility
-obj <- players$utility
-
-# Constraints matrix
-con <- rbind(
-  rep(1, n),          # exactly 25 players
-  players$is_pitcher, # at least 10 pitchers
-  players$is_catcher, # at least 2 catchers
-  players$salary      # salary cap
-)
-
-dir <- c("=", ">=", ">=", "<=")
-rhs <- c(25, 10, 2, salary_cap)
-
-result <- lp("max", obj, con, dir, rhs, all.bin = TRUE)
-best_team <- players[result$solution == 1, ]
+dat = read.csv("Baseball Data.csv")
+head(dat[,1:4])
+dat[is.na(dat)] = 0
 ```
 
-## Takeaways
+There were `NA's` for some players and their game statistics which we replaced with 0.
+The reason we replaced the missing data with zeros is that when we construct the player
+utility index missing data won't count towards or against players.
 
-- ILP finds a valid solution quickly, but the **quality is only as good as your utility index**.
-- Small changes to weights produce very different rosters — a reminder that coefficient estimation dominates solver precision.
-- The same framework applies cleanly to fantasy sports lineup optimization with tighter salary constraints.
+Each baseball player has game statistics associated with them. Below is the list of player level data.
+
+```r
+names(dat)
+```
+
+You can see the statistics description in the collapsible list and [appendix](#Appendix).
+
+Since the game statistics are in different units we standardize the data by subtracting the mean and dividing by the standard deviation, $x_{changed} = \frac{x-\mu}{s}$. Additionaly, we add two new variables
+`Off.norm` and `Def.norm` which are normalized `Off` and `Def` ratings using the formula
+$x_{changed}=\frac{x-min(x)}{max(x)-min(x)}$. We use the normalized offensive and defensive ratings to quickly evaluate the optimal team according to the ILP.
+
+```r
+# select numeric columns and relevant variables
+dat.scaled = scale(dat[,sapply(dat, class) == "numeric"][,c(-1:-2,-19)])
+
+# normalize Off and Def
+dat$Off.norm = (dat$Off-min(dat$Off))/(max(dat$Off)-min(dat$Off))
+dat$Def.norm = (dat$Def-min(dat$Def))/(max(dat$Def)-min(dat$Def))
+
+head(dat.scaled[,1:4])
+```
+
+Now that we have scaled player stats we will weigh them and add them up to obtain the player utility index $U_i$ for player $i$ to use it in the objective function.
+
+$$U_i(x) = \sum_{j=1}^{16} w_j \cdot \mathrm{Stat}_{ij}$$
+
+$\text{ for player } i \text{ where } i \in \{1,199\}$
+
+By introducing weights we can construct the weight vector which best suits our preferences.
+For example, if we wanted the player utility index to value the offensive statistics like 
+`RBI` more than the defensive statistics like `Def` we would just assign a bigger weight to RBI. We decided
+to value each statistic equally, i.e. weights are equal.
+
+# Constraint modelling
+In baseball there are 25 active men roster and 40 men roster that includes the 25 men active roster. To start a new team we 
+focus on building the perfect 25 men roster. Typically, a 25 men roster will 
+consist of five starting pitchers (SP), seven relief pitchers (Reliever), two catchers (C), six 
+infielders (IN), and five outfielders (OF). Current position variable `POS` has more than 5 aforementioned groups. We group them in the `POS2` variable by the five types SP, Reliever, C, IN, OF.
+
+```r
+position = function(x){ # given position x change x to group
+  if(x %in% c("1B","2B","3B","SS")) x = "IN"
+  else if(x %in% c("Closer")) x = "Reliever"
+  else x=as.character(x)
+}
+
+dat$POS2 = sapply(dat$POS, position)
+```
+
+Additionally, we will make sure that our 25 men active roster has at least one player of each of the following positions: first base (1B), second base (2B), third base (3B) and Short stop (SS).
+
+There is no salary cap in the Major League Baseball association, but rather a 
+threshold of 189$ million for the 40 men roster for period 2014-2016 beyond which a luxury tax applies. 
+For the first time violators the tax is 22.5% of the amount they were 
+over the threshold. We decided that we would allocate 178$ million for the 25 men roster.
+
+To model the above basic constraints and an objective function we came up
+with the player utility index $U(x_1,x_2,...,x_n)$ which is a function of the chosen set
+of $n$ player game statistics, 16 in our case. In our model we maximize the sum of the player utility indices. We have 16 game statistics of interest which are
+
+`colnames(dat[,sapply(dat, class) == "numeric"][,c(-1:-2,-19)])`
+
+Below is the resulting model.
+$$
+\begin{align}
+\text{max } & \sum^{199}_{i=1}U_i*x_i \\
+\text{s. t. } & \sum^{199}_{i=1}x_i = 25 \\
+& \sum x_{\text{SP}} \ge 5 \\
+& \sum x_{\text{Reliever}} \ge 7 \\ 
+& \sum x_{\text{C}} \ge 2 \\ 
+& \sum x_{\text{IN}} \ge 6 \\ 
+& \sum x_{\text{OF}} \ge 5 \\ 
+& \sum x_{\text{POS}} \ge 1 \text{ for } POS \in \{\text{1B,2B,3B,SS}\}\\
+& \sum x_{\text{LeftHandPitchers}} \ge 2 \\
+& \sum x_{\text{LeftHandBatters}} \ge 2 \\
+& \frac{1}{25} \sum Stat_{ij}x_{i} \ge mean(Stat_{j}) \text{ for } j = 1,2,...,16 \\
+& \sum^{199}_{i=1}salary_i*x_i \le 178
+\end{align}
+$$
+where 
+
+  - $U_i$- utility index for player $i$, $i \in \{1,199\}$
+  - $x_i$ - a binary variable which is one if player $i$ is selected
+  - $x_{\text{SP}}, x_{\text{Reliever}}$, etc. - binary variables that are one if player $i$ has the specified attribute such as Starting pitcher (SP), left hand pitcher, etc.
+  - $x_{\text{POS}}$ - binary variable which is one if player $i$ plays the position $POS$, $POS \in \{\text{1B,2B,3B,SS}\}$
+  - $Stat_{ij}$ - game statistic $j$ for player $i$, $j \in \{1,16\}$
+  - $mean(Stat_{j})$ - the average of the statistic $j$ across all players
+  - $salary_i$ - salary for player $i$ in dollars
+  
+Constraint (2) ensures that we get 25 players. Constraints (3) through (10) ensure that number of players
+with certain attributes meets the required minimum. Collection of constraints (11)
+makes sure that our team's average game stastistics outperform the average game statistics across all
+players. Constraint (12) ensures that we stay within our budget including the luxury tax.
+
+Below is the solution of this programm.
+
+```r
+library("lpSolve")
+
+i = 199 # number of players (variables)
+
+# constraints
+cons = rbind(
+  rep(1,i), # 25 man constraint (2)
+  sapply(dat$POS2, function(x) if (x == "SP") x=1 else x=0), # (3)
+  sapply(dat$POS2, function(x) if (x == "Reliever") x=1 else x=0), # (4)
+  sapply(dat$POS2, function(x) if (x == "C") x=1 else x=0), # (5)
+  sapply(dat$POS2, function(x) if (x == "IN") x=1 else x=0), # (6)
+  sapply(dat$POS2, function(x) if (x == "OF") x=1 else x=0), # (7)
+  sapply(dat$POS, function(x) if (x == "1B") x=1 else x=0), # (8)
+  sapply(dat$POS, function(x) if (x == "2B") x=1 else x=0), # (8)
+  sapply(dat$POS, function(x) if (x == "3B") x=1 else x=0), # (8)
+  sapply(dat$POS, function(x) if (x == "SS") x=1 else x=0), # (8)
+  sapply(dat$Throws, function(x) if (x == "L") x=1 else x=0), # (9)
+  sapply(dat$Bats, function(x) if (x == "L") x=1 else x=0), # (10)
+  t(dat[,colnames(dat.scaled)])/25, # (11) outperform the average
+  dat$Salary/1000000 # (12) budget constraint
+)
+
+# model
+f.obj = apply(dat.scaled,1,sum)
+f.dir = c("=",rep(">=",27),"<=")
+f.rhs = c(25,5,7,2,6,5,2,2,rep(1,4),
+          apply(dat[,colnames(dat.scaled)],2,mean),
+          178)
+
+model = lp("max", f.obj, cons, f.dir, f.rhs, all.bin=T,compute.sens=1)
+model
+sol = model$solution
+sol
+```
+
+Let's look at our ideal baseball team given the constraints outlined above.
+
+```r
+# selected players
+dat[which(sol>0),c(1:3,6,28:29)]
+```
+
+Seems like a decent team with the mean normalized offensive and defensive ratings of
+higher than average (see RPubs) and `mean(dat[which(sol>0),]$Def.norm)` respectively. 
+For comparison mean normalized offensive and defensive ratings for all players are 
+`mean(dat$Off.norm)` and `mean(dat$Def.norm)` respectively. Our team outperforms the average and its mean offensive and defensive ratings are better than $`ecdf(dat$Off.norm)(mean(dat[which(sol>0),]$Off.norm))*100`$%  and $`ecdf(dat$Def.norm)(mean(dat[which(sol>0),]$Def.norm))*100`$%  of other players correspondingly.
+
+```r
+par(mfrow=c(1,2))
+plot(density(dat$Off.norm)$x,
+     density(dat$Off.norm)$y/max(dat$Off.norm)/10, 
+     type = "l",
+     ylim = c(0,1),
+     xlab="rating",ylab="probability",
+     main = "Density of normalized \noffensive rating for all players")
+plot(density(dat$Def.norm)$x,
+     density(dat$Def.norm)$y/max(dat$Def.norm)/100, 
+     type = "l",
+     xlim = c(0.36,0.38),
+     ylim = c(0,1),
+     xlab="rating",ylab="",
+     main = "Density of normalized \ndefensive rating for all players")
+```
+
+```r
+quantile(dat$Off.norm, .9) 
+
+f <- ecdf(dat$Off.norm)
+f(mean(dat[which(sol>0),]$Off.norm))
+
+df = approxfun(density(dat$Off.norm))
+integrate(df,0,mean(dat[which(sol>0),]$Off.norm))
+```
+
+While this is a straightforward way to model the selection of the players there are several
+nuances we need to address. One of them is that the standardized game statistics are not
+additively independent. As a result, the our utility index poorly measures the player's value and is biased. It is possible to construct an unbiased utility index which has been done a lot in baseball (look up sabermetrics). `Off` and `Def`and a lot of other statistics are examples of utility indices.
+
+Another issue we need to addrees is when we substituted the missing values with zero. Players with
+missing game statistics values have their utility index diminished because one of the stats used to calculate it is zero. However, imputing with zero is better than imputing with the mean in our case.
+By imputing with the mean we would introduce new information into the data which may be misleading, ex. g.
+a player's game stat is worse/better than the average. As a result, the player utility index would be overestimated/underestimated.
+
+Finally, I believe that using statistical and mathematical methods is only acceptable as a supplement to the decision making process not only in baseball, but in every field.
+
+# Appendix
+**Baseball statistics abbreviations**
+
+  - PA - Plate appearance: number of completed batting appearances
+  - HR - Home runs: hits on which the batter successfully touched all four bases, without the contribution of a fielding error
+  - R - Runs scored: number of times a player crosses home plate
+  - RBI - Run batted in: number of runners who score due to a batters' action, except when batter grounded into double play or reached on an error
+  - SB - Stolen base: number of bases advanced by the runner while the ball is in the possession of the defense
+  - ISO - Isolated power: a hitter's ability to hit for extra bases, calculated by subtracting batting average from slugging percentage
+  - BABIP - Batting average on balls in play: frequency at which a batter reaches a base after putting the ball in the field of play. Also a pitching category
+  - AVG - Batting average (also abbreviated BA): hits divided by at bats 
+  - OBP - On-base percentage: times reached base divided by at bats plus walks plus hit by pitch plus sacrifice flies 
+  - SLG - Slugging average: total bases achieved on hits divided by at-bats
+  - wOBA - Some argue that the OPS, on-base plus slugging, formula is flawed and that more weight should be shifted towards OBP (on-base percentage). The statistic wOBA (weighted on-base average) attempts to correct for this.
+  - wRC. - Weighted Runs Created (wRC): an improved version of Bill James' Runs Created statistic, which attempted to quantify a player's total offensive value and measure it by runs.
+  - BsR - Base Runs: Another run estimator, like Runs Created; a favorite of writer Tom Tango
+  - WAR - Wins above replacement: a non-standard formula to calculate the number of wins a player contributes to his team over a "replacement-level player"
+  - Off - total runs above or below average based on offensive contributions (both batting and baserunning) 
+  - Def - total runs above or below average based on defensive contributions (fielding and position). 
+  
+*Source: [Wikipedia::Baseball statistics](https://en.wikipedia.org/wiki/Baseball_statistics#Commonly_used_statistics)*

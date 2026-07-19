@@ -1,75 +1,168 @@
 ---
+title: "Visualizing Indego bike geoson data in Python using Folium"
 type: post
-title: "Visualizing Indego bike share data in Python using Folium"
 date: "2016-03-06"
-summary: "A simple example of visualizing GeoJSON data in Python — fetching Philadelphia's Indego bike share station feed and plotting it on a Leaflet map with Folium."
-tags: ["python", "geospatial", "folium", "data-visualization", "philly"]
+summary: "A simple example of visualizing geoson data in python using Folium. We obtain Philly Indego bike data from opendataphilly website. We download the data using\u2026"
+tags: ["python", "ipynb", "geoson", "indego-bike-share", "philly"]
 ---
 
-*Co-authored with [Shantanu Saha](https://www.linkedin.com/in/1saha).*
+Co-authored with [Shantanu Saha](https://www.linkedin.com/in/1saha) and [Koba Khitalishvili](http://www.kobakhit.com/about/).
 
-Full notebook on nbviewer: [view ipynb](/ipynb/2016-3-6-visualizing-indego-bike-geoson-data-in-python-using-folium.ipynb)
+Notebook: [download](/ipynb/2016-3-6-visualizing-indego-bike-geoson-data-in-python-using-folium.ipynb)
 
-A simple example of visualizing GeoJSON data in Python using [Folium](https://folium.readthedocs.org/en/latest/). We obtain Philadelphia Indego bike share station data from [OpenDataPhilly](https://www.opendataphilly.org/dataset/bike-share-stations) using their free public API.
-
-## Fetching the data
+A simple example of visualizing geoson data in python using [Folium](https://folium.readthedocs.org/en/latest/). We obtain Philly Indego bike data from [opendataphilly](https://www.opendataphilly.org/dataset/bike-share-stations) website. We download the data using the website's free public api.
 
 ```python
-import json, urllib2
+import json,urllib2
 import pandas as pd
 
+# add a header so that the website doesnt give 403 error
 opener = urllib2.build_opener()
 opener.addheaders = [('User-agent', 'Mozilla/5.0')]
 response = opener.open('https://api.phila.gov/bike-share-stations/v1')
 
+# parse json using pandas
 df = pd.read_json(response)
 df.head()
 ```
 
-Each entry in the `features` column looks like:
+|  | features | type |
+| --- | --- | --- |
+| 0 | {u'geometry': {u'type': u'Point', u'coordinate... | FeatureCollection |
+| 1 | {u'geometry': {u'type': u'Point', u'coordinate... | FeatureCollection |
+| 2 | {u'geometry': {u'type': u'Point', u'coordinate... | FeatureCollection |
+| 3 | {u'geometry': {u'type': u'Point', u'coordinate... | FeatureCollection |
+| 4 | {u'geometry': {u'type': u'Point', u'coordinate... | FeatureCollection |
 
-```json
-{
-  "geometry": {"coordinates": [-75.16374, 39.95378], "type": "Point"},
-  "properties": {
-    "name": "Municipal Services Building Plaza",
-    "bikesAvailable": 6,
-    "docksAvailable": 19,
-    "kioskPublicStatus": "Active"
-  }
-}
-```
-
-## Flattening the nested structure
+Now, `df` is a dictionary of dictionaries. We are interested in the features column. Each entry looks like this.
 
 ```python
-stations = pd.io.json.json_normalize(df['features'].tolist())
-stations = stations.rename(columns={
-    'geometry.coordinates': 'coordinates',
-    'properties.name': 'name',
-    'properties.bikesAvailable': 'bikes',
-    'properties.docksAvailable': 'docks'
-})
-stations[['lng', 'lat']] = stations['coordinates'].apply(pd.Series)
+df['features'][0]
 ```
 
-## Plotting with Folium
+```
+{u'geometry': {u'coordinates': [-75.16374, 39.95378], u'type': u'Point'},
+ u'properties': {u'addressCity': u'Philadelphia',
+  u'addressState': u'PA',
+  u'addressStreet': u'1401 John F. Kennedy Blvd.',
+  u'addressZipCode': u'19102',
+  u'bikesAvailable': 6,
+  u'closeTime': u'23:58:00',
+  u'docksAvailable': 19,
+  u'eventEnd': None,
+  u'eventStart': None,
+  u'isEventBased': False,
+  u'isVirtual': False,
+  u'kioskId': 3004,
+  u'kioskPublicStatus': u'Active',
+  u'name': u'Municipal Services Building Plaza',
+  u'openTime': u'00:02:00',
+  u'publicText': u'',
+  u'timeZone': u'Eastern Standard Time',
+  u'totalDocks': 25,
+  u'trikesAvailable': 0},
+ u'type': u'Feature'}
+```
+
+```python
+# number of rows (bike stations)
+len(df["features"])
+```
+
+    73
+
+We organize data first before plotting to follow a [Folium example](http://nbviewer.jupyter.org/github/ocefpaf/folium_notebooks/blob/master/test_clustered_markes.ipynb). Basically we need to create a list of tuples with latitude and longtitude. We called it `coordinates`.
+
+```python
+# Organize data
+coordinates = []
+
+for i in range(0,len(df['features'])):
+    coordinates.append(((df["features"][i]["geometry"]['coordinates'])))
+
+# convert list of lists to list of tuples      
+coordinates = [tuple([i[1],i[0]]) for i in coordinates] 
+print(coordinates[0:10])
+```
+
+    [(39.95378, -75.16374), (39.94733, -75.14403), (39.9522, -75.20311), (39.94517, -75.15993), (39.98082, -75.14973), (39.95576, -75.18982), (39.94711, -75.16618), (39.96046, -75.19701), (39.94217, -75.1775), (39.96317, -75.14792)]
+
+Let's visualize the coordinates geoson data using Folium.
 
 ```python
 import folium
+import numpy as np
 
-philly = folium.Map(location=[39.9526, -75.1652], zoom_start=13)
+#print(folium.__file__)
+#print(folium.__version__)
 
-for _, row in stations.iterrows():
-    folium.CircleMarker(
-        location=[row['lat'], row['lng']],
-        radius=6,
-        popup=f"{row['name']}\n{row['bikes']} bikes / {row['docks']} docks",
-        color='#0f766e',
-        fill=True
-    ).add_to(philly)
+# get center of map
+meanlat = np.mean([i[0] for i in coordinates])
+meanlon = np.mean([i[1] for i in coordinates])
 
-philly.save('indego_map.html')
+# initialize map
+mapa = folium.Map(location=[meanlat, meanlon],
+                  tiles='OpenStreetMap', zoom_start=13)
+# add markers
+for i in range(0,len(coordinates)):
+    
+    # create popup on click
+    html="""
+    Address: {}<br>
+    Bikes available: {}<br>
+    Docks: {}<br>
+    """
+    html = html.format(df['features'][i]['properties']['addressStreet'],\
+               df['features'][i]['properties']['bikesAvailable'],\
+               df['features'][i]['properties']['docksAvailable'])
+    iframe = folium.element.IFrame(html=html, width=150, height=150)
+    popup = folium.Popup(iframe, max_width=2650)
+    
+    #  add marker to map
+    folium.Marker(coordinates[i],
+                  popup=popup,
+                 ).add_to(mapa)
+
+mapa # show map
 ```
 
-The resulting map shows all active Indego stations across Philadelphia, with a popup for each showing available bikes and docks. Folium wraps [Leaflet.js](https://leafletjs.com/) and makes it easy to build interactive web maps entirely from Python.
+*[Interactive Folium map omitted — open the notebook to view]*
+
+We can cluster nearby points. Also, let's look at a different background by changing the tiles argument. List of available tiles can be found in [Folium github repo](https://github.com/python-visualization/folium).
+
+```python
+from folium.plugins import MarkerCluster # for marker clusters
+
+# initialize map
+mapa = folium.Map(location=[meanlat, meanlon],
+                  tiles='Cartodb Positron', zoom_start=13)
+
+# add marker clusters
+mapa.add_children(MarkerCluster(locations=coordinates, popups=coordinates))
+mapa
+```
+
+*[Interactive Folium map omitted — open the notebook to view]*
+
+We can utilize Folium plugins to view the geoson data in different ways. For example, let's generate a heat map of the bike stations in Philly. We can see that there are dense areas in center city and Chinatown mostly.
+
+```python
+from folium.plugins import HeatMap
+
+# initialize map
+mapa = folium.Map(location=[meanlat, meanlon],
+                  tiles='Cartodb Positron', zoom_start=13)
+
+# add heat
+mapa.add_children(HeatMap(coordinates))
+mapa
+```
+
+*[Interactive Folium map omitted — open the notebook to view]*
+
+For more examples go to the Folium's examples [page](https://folium.readthedocs.org/en/latest/examples.html).
+
+# Resources used
+
+  - [Folium docs](https://folium.readthedocs.org/en/latest/)
+  - [Folium Github](https://github.com/python-visualization/folium)
