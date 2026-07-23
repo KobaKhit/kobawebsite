@@ -12,7 +12,7 @@ View on Julia Notebook nbviewer: [https://lnkd.in/eGnHgy2](https://lnkd.in/eGnHg
 
 Notebook: [download](/ipynb/2016-2-2-getting-started-julia.ipynb) · [nbviewer](https://nbviewer.jupyter.org/url/www.kobakhit.com/ipynb/2016-2-2-getting-started-julia.ipynb)
 
-![alt text](/info-graphic.jpg)
+![alt text](/entries/2016-02-02-getting-started-julia/info-graphic.jpg)
 
 **Update:**
 In September 2019 Tao published a paper in which he proved that the Collatz Conjecture is "almost true" for "almost all numbers." 
@@ -313,7 +313,7 @@ using Gadfly
 Gadfly.plot(df,x=:Number, y=:NumofSteps, Geom.point, Guide.title("Collatz Conjecture"))
 ```
 
-*[Plot omitted — see notebook]*
+<iframe class="embed-plot" title="Collatz — steps vs number" src="/entries/2016-02-02-getting-started-julia/embeds/julia-plot-1.html" loading="lazy"></iframe>
 
 Looks pretty. I will color the points based on whether the original number is even or odd. 
 
@@ -321,7 +321,7 @@ Looks pretty. I will color the points based on whether the original number is ev
 Gadfly.plot(df,x=:Number, y=:NumofSteps, color = :evenodd, Geom.point) # assign plot to variable
 ```
 
-*[Plot omitted — see notebook]*
+<iframe class="embed-plot" title="Collatz — colored by even/odd" src="/entries/2016-02-02-getting-started-julia/embeds/julia-plot-2.html" loading="lazy"></iframe>
 
 It looks like odd and even numbers might overlay each other. Let's plot even and odd numbers side by side.
 
@@ -331,7 +331,7 @@ Gadfly.plot(df, xgroup=:evenodd, color = :evenodd,
     Geom.subplot_grid(Geom.point))
 ```
 
-*[Plot omitted — see notebook]*
+<iframe class="embed-plot" title="Collatz — even vs odd side by side" src="/entries/2016-02-02-getting-started-julia/embeds/julia-plot-3.html" loading="lazy"></iframe>
 
 Even numbers up to 1000 require fewer steps to complete the Collatz procedure than odd numbers. Let's do the same for prime numbers.
 
@@ -341,7 +341,7 @@ Gadfly.plot(df, xgroup=:isprime, color = :isprime,
     Geom.subplot_grid(Geom.point))
 ```
 
-*[Plot omitted — see notebook]*
+<iframe class="embed-plot" title="Collatz — prime vs non-prime" src="/entries/2016-02-02-getting-started-julia/embeds/julia-plot-4.html" loading="lazy"></iframe>
 
 Seems like prime numbers follow a similar distribution of steps to that of non primes. Finally, let's plot this data by separating even, odd and prime numbers.
 
@@ -353,7 +353,7 @@ p = Gadfly.plot(df, xgroup=:evenodd, ygroup=:isprime,
     Guide.title("Number of steps to complete the Collatz procedure vs. Input"))
 ```
 
-*[Plot omitted — see notebook]*
+<iframe class="embed-plot" title="Collatz — even/odd × prime grid" src="/entries/2016-02-02-getting-started-julia/embeds/julia-plot-5.html" loading="lazy"></iframe>
 
 Obvisouly, there are no even prime numbers except 2 and hence the plot in bottom right contains a lonely (2,1) point. Let's calculate the mean number of steps required for $x$ to complete the Collatz process by whether $x$ is even, odd or prime.
 

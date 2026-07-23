@@ -12,41 +12,13 @@ Full report on RPubs: [http://rpubs.com/Koba/linear-opt-baseball](http://rpubs.c
 
 Source: [download zip](/ipynb/2016-2-18-linear-opt-baseball.zip) · [Reddit thread](https://redd.it/49mfxu)
 
-> **Edit:** The choice of statistics for our utility index is almost random. The main goal was to model the general constraints and objective function. This code allows to easily add desired statistics and extend the general case to include more sophisticated preferences, for example using the weight vector.
-
-**Best 25-man team**
-
-| # | Salary | Name | POS | Team | Off.norm | Def.norm |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | 31,000,000 | Clayton Kershaw | SP |  | 0.2327 | 0.3713 |
-| 2 | 19,750,000 | David Price | SP |  | 0.2327 | 0.3713 |
-| 3 | 17,277,777 | Buster Posey | C | Giants | 0.4901 | 0.5324 |
-| 4 | 17,142,857 | Max Scherzer | SP |  | 0.2327 | 0.3713 |
-| 5 | 14,000,000 | Joey Votto | 1B | Reds | 0.8000 | 0.1886 |
-| 6 | 10,500,000 | Yoenis Cespedes | OF | - - - | 0.5416 | 0.5796 |
-| 7 | 8,050,000 | Aroldis Chapman | Closer | Reds | 0.2327 | 0.3713 |
-| 9 | 7,000,000 | Russell Martin | C | Blue Jays | 0.2693 | 0.6110 |
-| 8 | 7,000,000 | Wade Davis | Closer | Royals | 0.2327 | 0.3713 |
-| 10 | 6,083,333 | Mike Trout | OF | Angels | 0.8307 | 0.4126 |
-| 11 | 6,000,000 | Chris Sale | SP |  | 0.2327 | 0.3713 |
-| 12 | 4,300,000 | Josh Donaldson | 3B | Blue Jays | 0.7109 | 0.5815 |
-| 13 | 3,630,000 | Jake Arrieta | SP |  | 0.2327 | 0.3713 |
-| 14 | 3,200,000 | Zach Britton | Closer | Orioles | 0.2327 | 0.3713 |
-| 15 | 3,083,333 | Paul Goldschmidt | 1B | Diamondbacks | 0.7772 | 0.2358 |
-| 16 | 2,725,000 | Lorenzo Cain | OF | Royals | 0.4921 | 0.6798 |
-| 18 | 2,500,000 | Dee Gordon | 2B | Marlins | 0.3772 | 0.5403 |
-| 17 | 2,500,000 | Bryce Harper | OF | Nationals | 1.0000 | 0.2043 |
-| 19 | 547,100 | Cody Allen | Closer | Indians | 0.2327 | 0.3713 |
-| 20 | 543,000 | Xander Bogaerts | SS | Red Sox | 0.3396 | 0.5285 |
-| 21 | 535,000 | Trevor Rosenthal | Closer | Cardinals | 0.2327 | 0.3713 |
-| 22 | 519,500 | A.J. Pollock | OF | Diamondbacks | 0.5505 | 0.5422 |
-| 23 | 509,500 | Carson Smith | Closer | Mariners | 0.2327 | 0.3713 |
-| 24 | 509,000 | Matt Duffy | 2B | Giants | 0.3911 | 0.5972 |
-| 25 | 507,500 | Dellin Betances | Closer | Yankees | 0.2327 | 0.3713 |
-
 We try to use Integer Linear Programming to build a perfect 25 men roster baseball team. We present our best team below which is the solution of the ILP model we built using the 2015 MLB season player data. If you understand baseball please evaluate our resulting baseball team and drop a comment, so that we know whether ILP can be used to get a decent baseball team. After the table I describe how we arrived at our solution.
 
-*[Interactive DataTable omitted]*
+> **Edit:** The choice of statistics for our utility index is almost random. The main goal was to model the general constraints and objective function. This code allows to easily add desired statistics and extend the general case to include more sophisticated preferences, for example using the weight vector.
+
+**Best 25-man team** (sortable / searchable — scroll inside the table)
+
+<iframe class="embed-tall" title="Best 25-man team — interactive DataTable" src="/entries/2016-02-18-linear-opt-baseball/embeds/baseball-roster.html" loading="lazy"></iframe>
 
 # Data preprocessing
 Let's read in the 2015 regular season player level data. 
@@ -114,9 +86,9 @@ dat$POS2 = sapply(dat$POS, position)
 Additionally, we will make sure that our 25 men active roster has at least one player of each of the following positions: first base (1B), second base (2B), third base (3B) and Short stop (SS).
 
 There is no salary cap in the Major League Baseball association, but rather a 
-threshold of 189$ million for the 40 men roster for period 2014-2016 beyond which a luxury tax applies. 
+threshold of \$189 million for the 40 men roster for period 2014-2016 beyond which a luxury tax applies. 
 For the first time violators the tax is 22.5% of the amount they were 
-over the threshold. We decided that we would allocate 178$ million for the 25 men roster.
+over the threshold. We decided that we would allocate \$178 million for the 25 men roster.
 
 To model the above basic constraints and an objective function we came up
 with the player utility index $U(x_1,x_2,...,x_n)$ which is a function of the chosen set

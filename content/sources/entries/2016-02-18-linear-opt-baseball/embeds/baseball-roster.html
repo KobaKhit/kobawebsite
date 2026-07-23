@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Best 25-man team</title>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css"/>
+<style>
+  body { margin: 12px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+  table.dataTable { width: 100% !important; }
+  .dataTables_wrapper { font-size: 13px; }
+</style>
+</head>
+<body>
+<table id="tbl" class="display compact" style="width:100%"></table>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script>
+const headers = ["","Salary","Name","POS","Team","Off.norm","Def.norm"];
+const rows = [["25","   507,500","Dellin Betances","Closer","Yankees","0.2327","0.3713"],["24","   509,000","Matt Duffy","2B","Giants","0.3911","0.5972"],["23","   509,500","Carson Smith","Closer","Mariners","0.2327","0.3713"],["22","   519,500","A.J. Pollock","OF","Diamondbacks","0.5505","0.5422"],["21","   535,000","Trevor Rosenthal","Closer","Cardinals","0.2327","0.3713"],["20","   543,000","Xander Bogaerts","SS","Red Sox","0.3396","0.5285"],["19","   547,100","Cody Allen","Closer","Indians","0.2327","0.3713"],["18"," 2,500,000","Dee Gordon","2B","Marlins","0.3772","0.5403"],["17"," 2,500,000","Bryce Harper","OF","Nationals","1.0000","0.2043"],["16"," 2,725,000","Lorenzo Cain","OF","Royals","0.4921","0.6798"],["15"," 3,083,333","Paul Goldschmidt","1B","Diamondbacks","0.7772","0.2358"],["14"," 3,200,000","Zach Britton","Closer","Orioles","0.2327","0.3713"],["13"," 3,630,000","Jake Arrieta","SP","","0.2327","0.3713"],["12"," 4,300,000","Josh Donaldson","3B","Blue Jays","0.7109","0.5815"],["11"," 6,000,000","Chris Sale","SP","","0.2327","0.3713"],["10"," 6,083,333","Mike Trout","OF","Angels","0.8307","0.4126"],["9"," 7,000,000","Russell Martin","C","Blue Jays","0.2693","0.6110"],["8"," 7,000,000","Wade Davis","Closer","Royals","0.2327","0.3713"],["7"," 8,050,000","Aroldis Chapman","Closer","Reds","0.2327","0.3713"],["6","10,500,000","Yoenis Cespedes","OF","- - -","0.5416","0.5796"],["5","14,000,000","Joey Votto","1B","Reds","0.8000","0.1886"],["4","17,142,857","Max Scherzer","SP","","0.2327","0.3713"],["3","17,277,777","Buster Posey","C","Giants","0.4901","0.5324"],["2","19,750,000","David Price","SP","","0.2327","0.3713"],["1","31,000,000","Clayton Kershaw","SP","","0.2327","0.3713"]];
+$('#tbl').DataTable({
+  data: rows,
+  columns: headers.map((h) => ({ title: h })),
+  pageLength: 25,
+  scrollX: true,
+  scrollY: '360px',
+  scrollCollapse: true,
+  order: []
+});
+</script>
+</body>
+</html>

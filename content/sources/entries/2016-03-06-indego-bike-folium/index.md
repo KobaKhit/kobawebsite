@@ -126,7 +126,7 @@ for i in range(0,len(coordinates)):
 mapa # show map
 ```
 
-*[Interactive Folium map omitted — open the notebook to view]*
+<iframe class="embed-map" title="Indego bike stations — markers" src="/entries/2016-03-06-indego-bike-folium/embeds/indego-markers.html" loading="lazy"></iframe>
 
 We can cluster nearby points. Also, let's look at a different background by changing the tiles argument. List of available tiles can be found in [Folium github repo](https://github.com/python-visualization/folium).
 
@@ -142,7 +142,7 @@ mapa.add_children(MarkerCluster(locations=coordinates, popups=coordinates))
 mapa
 ```
 
-*[Interactive Folium map omitted — open the notebook to view]*
+<iframe class="embed-map" title="Indego bike stations — clusters" src="/entries/2016-03-06-indego-bike-folium/embeds/indego-clusters.html" loading="lazy"></iframe>
 
 We can utilize Folium plugins to view the geoson data in different ways. For example, let's generate a heat map of the bike stations in Philly. We can see that there are dense areas in center city and Chinatown mostly.
 
@@ -158,7 +158,7 @@ mapa.add_children(HeatMap(coordinates))
 mapa
 ```
 
-*[Interactive Folium map omitted — open the notebook to view]*
+<iframe class="embed-map" title="Indego bike stations — heatmap" src="/entries/2016-03-06-indego-bike-folium/embeds/indego-heatmap.html" loading="lazy"></iframe>
 
 For more examples go to the Folium's examples [page](https://folium.readthedocs.org/en/latest/examples.html).
 

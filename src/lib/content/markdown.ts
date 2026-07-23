@@ -1,15 +1,43 @@
 import matter from "gray-matter";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import remarkRehype from "remark-rehype";
+import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import rehypeStringify from "rehype-stringify";
+import { visit } from "unist-util-visit";
 
 export interface ParsedMarkdown<T = Record<string, unknown>> {
   frontmatter: T;
   content: string;
   html: string;
   slug: string;
+}
+
+/** Wrap <table> nodes in a scroll container (wide / tall tables stay usable). */
+function rehypeScrollableTables() {
+  return (tree: unknown) => {
+    visit(tree as never, "element", (node: { tagName?: string }, index, parent) => {
+      if (node.tagName !== "table" || !parent || typeof index !== "number") return;
+      const parentNode = parent as {
+        type?: string;
+        properties?: { className?: string | string[] };
+        children: unknown[];
+      };
+      if (parentNode.type === "element" && parentNode.properties?.className) {
+        const cls = parentNode.properties.className;
+        const list = Array.isArray(cls) ? cls.map(String) : [String(cls)];
+        if (list.includes("table-scroll")) return;
+      }
+      parentNode.children[index] = {
+        type: "element",
+        tagName: "div",
+        properties: { className: ["table-scroll"] },
+        children: [node],
+      };
+    });
+  };
 }
 
 export async function parseMarkdown<T = Record<string, unknown>>(
@@ -19,8 +47,11 @@ export async function parseMarkdown<T = Record<string, unknown>>(
   const { data, content } = matter(raw);
   const processed = await remark()
     .use(remarkGfm)
+    .use(remarkMath)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeKatex)
     .use(rehypeRaw)
+    .use(rehypeScrollableTables)
     .use(rehypeStringify)
     .process(content);
   return {

@@ -108,8 +108,10 @@ plot.k<- function(df,title){
 According to the project instructions, with time the recording of the weather events improved. In the multiline graph I show the number of occurences of 10 most frequent weather events by year during 1950-2011. The number of occurences of the events increased drastically due to improvements in the process of recording those events.
 
 ```r
-# Interactive Rickshaw chart of event counts by year (see RPubs / Rmd)
+# Interactive Rickshaw chart of event counts by year
 ```
+
+<iframe class="embed-tall" title="Weather event counts by year" src="/entries/2016-02-10-impact-of-weather-events/embeds/weather-rickshaw.html" loading="lazy"></iframe>
 
 Below is the list of average occurences per year during 1950-2011 of 20 most frequent events.
 
@@ -119,11 +121,15 @@ avg_occ = sort(apply(table(data$Year,data$EVTYPE),2,sum),decreasing=TRUE)[1:20]/
 data.frame(`Avg Occurences` = avg_occ)
 ```
 
-In the table below I show the annual averages of property damage, crop damage, total damage, number of injuries, deaths and occurences during **1950-2011**. I highlight the time period because later in my analysis I focus on the 2000-2011 period. The table is initially sorted by the average number of occurences per year. You may play around with the table.
+In the table below I show the annual averages of property damage, crop damage, total damage, number of injuries, deaths and occurences during **1950-2011**. I highlight the time period because later in my analysis I focus on the 2000-2011 period. The table is initially sorted by the average number of occurences per year. You may play around with the interactive table.
 
 ```r
-# Interactive DataTable of annual averages (see RPubs / Rmd)
+# Interactive DataTable of annual averages
 ```
+
+<iframe class="embed-tall" title="Weather events — interactive DataTable" src="/entries/2016-02-10-impact-of-weather-events/embeds/weather-datatable.html" loading="lazy"></iframe>
+
+Full report also on [RPubs](http://rpubs.com/Koba/159392).
 
 Let's see whether the most frequent events have a significant effect on the health of population and the infrastructure. 
 
